@@ -49,7 +49,7 @@ export function Filter() {
 
 // Sample dataset format for majorCard
 
-const sampleMajorData = [{majorName: "Aquatic and Fishery Sciences", minor: true, degreeType: "bs", majorStatus: "open", imgURL: "img/fish.jpg", alt: "fish in the ocean"}];
+const sampleMajorData = [{majorName: "Aquatic and Fishery Sciences", minor: true, degreeType: "B.S.", majorStatus: "open", imgURL: "img/fish.jpg", alt: "fish in the ocean"}];
 
 
 
@@ -65,9 +65,9 @@ export function MajorCard(props) {
     }
 
     // Adding formatting for the type of degree it is and if there is a minor
-    let degreeInfo = majorCard.degreeType.substring(0) + "." + majorCard.degreeType.substring(1) + "."
+    let degreeInfo = majorCard.degreeType;
     if (majorCard.minor === true) {
-      degreeInfo = degreeInfo + ", " + "Minor";
+      degreeInfo = degreeInfo + ", Minor";
     }
 
     return (
@@ -77,7 +77,7 @@ export function MajorCard(props) {
         </img>
         <div className="card-body">
           <h4 className="card-title text-center">{majorCard.majorName}</h4>
-          <p className="card-text text-center"> {majorCard.degreeInfo} </p>
+          <p className="card-text text-center"> {degreeInfo} </p>
           <a href="aquatic.html" class="btn btn-outline-success" role="button">Learn more</a>
         </div>
         <div className="card-footer text-center text-muted">Image from <a
