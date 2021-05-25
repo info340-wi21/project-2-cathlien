@@ -6,7 +6,7 @@ export default function App(props) {
     <PurpleBlock />
     <MainNav />
     <Filter />
-    <MajorCard majorCard={sampleMajorData} />
+    <CardList cards={sampleMajorData} />
     </div>;
 }
 
@@ -48,7 +48,7 @@ export function Filter() {
 
 // Sample dataset format for majorCard
 
-const sampleMajorData = {majorName: "Aquatic and Fishery Sciences", minor: true, degreeType: "bs", majorStatus: "open", imgURL: "img/fish.jpeg", alt: "fish in the ocean"}
+const sampleMajorData = [{majorName: "Aquatic and Fishery Sciences", minor: true, degreeType: "bs", majorStatus: "open", imgURL: "img/fish.jpg", alt: "fish in the ocean"}];
 
 
 
@@ -77,11 +77,19 @@ export function MajorCard(props) {
         <div className="card-body">
           <h4 className="card-title text-center">{majorCard.majorName}</h4>
           <p className="card-text text-center"> {majorCard.degreeInfo} </p>
-          <p> Button will go here </p>
+          <a href="aquatic.html" class="btn btn-outline-success" role="button">Learn more</a>
         </div>
         <div className="card-footer text-center text-muted">Image from <a
               href="https://unsplash.com/photos/TiTblwCHZFY"><cite>Unsplash</cite></a>
         </div>
       </div>
     )
+}
+
+export function CardList(props) {
+  let cards = props.cards;
+  let element = cards.map((card) => {
+    return <MajorCard key={card.majorName} majorCard={card} />;
+  })
+  return <div class="container"><div class="card-columns">{element}</div></div>
 }
