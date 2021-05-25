@@ -6,6 +6,7 @@ export default function App() {
     <PurpleBlock />
     <MainNav />
     <Filter />
+    <majorCard majorCard={sampleMajorData} />
     </div>;
 }
 
@@ -43,4 +44,44 @@ export function Filter() {
       </select>
   </div>
 </form>;
+}
+
+// Sample dataset format for majorCard
+
+const sampleMajorData = {majorName: "Aquatic and Fishery Sciences", minor: true, degreeType: "bs", majorStatus: "open", imgURL: "../img/test", alt: "fish in the ocean"}
+
+
+
+// creates card for majors, need to add ability to take data from json for content and add client side routing to the links
+// Prop name is expected to be majorCard, and represent a single major object
+export function majorCard(props) {
+    let majorCard = props.majorCard
+    
+    // Classes for major card, used for sorting
+    let cardClasses = "card text-center m-4" + majorCard.degreeType + majorCard.majorStatus
+    if (majorCard.minor == true) {
+      let cardClasses = cardClasses + "minor"
+    }
+
+    // Adding formatting for the type of degree it is and if there is a minor
+    let degreeInfo = majorCard.degreeType.substring(0) + "." + majorCard.degreeType.substring(1) + "."
+    if (majorCard.minor == true) {
+      degreeInfo = degreeInfo + ", " + "Minor"
+    }
+
+    return (
+      <div className={cardClasses}>
+        <img
+         className="card-img-top" src={majorCard.imgURL} alt={majorCard.alt}> 
+        </img>
+        <div className="card-body">
+          <h4 className="card-title text-center">{majorCard.majorName}</h4>
+          <p className="card-text text-center"> {majorCard.degreeInfo} </p>
+          <p> Button will go here </p>
+        </div>
+        <div className="card-footer text-center text-muted">Image from <a
+              href="https://unsplash.com/photos/TiTblwCHZFY"><cite>Unsplash</cite></a>
+        </div>
+      </div>
+    )
 }
