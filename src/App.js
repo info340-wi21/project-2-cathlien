@@ -6,7 +6,7 @@ export default function App(props) {
     <PurpleBlock />
     <MainNav />
     <Filter />
-    <CardList cards={sampleMajorData} />
+    <CardList cards={props.majors} />
     <Footer />
     </div>;
 }
@@ -46,20 +46,6 @@ export function Filter() {
   </div>
 </form>;
 }
-
-// Sample dataset format for majorCard
-
-const sampleMajorData = [
-  {"majorName": "Aquatic and Fishery Sciences", "minor": true, degreeType: "B.S.", "majorStatus":"open", "imgURL":"img/fish.jpg", "alt":"fish in the ocean"},
-  {"majorName": "Environmental Science & Terrestrail Resource Management", "minor": true, degreeType: "B.S.", "majorStatus":"open", "imgURL":"img/atmosphere.jpg", "alt":"clouds"},
-  {"majorName": "Atmospheric Sciences", "minor": true, degreeType: "B.S.", "majorStatus": "Minimum major", "imgURL":"img/atmosphere.jpg", "alt":"clouds"},
-  {"majorName": "Environmental Studies", "minor": true, degreeType: "B.A.", "majorStatus": "open", "imgURL":"img/hill.jpg", "alt":"a hill with windmills"},
-  {"majorName": "Bioresource Science and Engineering", "minor": true, degreeType: "B.S.", "majorStatus":"Capacity-constrained major", "imgURL":"img/bioresource.jpg", "alt":"laboratory tubes"},
-  {"majorName": "Marine Biology", "minor": true, degreeType: "B.S.", "majorStatus":"Open", "imgURL":"img/marine bio.jpg", "alt":"marine biology"},
-  {"majorName": "Earth and Space Sciences", "minor": true, degreeType: "B.S., B.A.", "majorStatus":"open", "imgURL":"img/earth.jpg", "alt":"earth from space"},
-  {"majorName": "Oceanography", "minor": true, degreeType: "B.S., B.A.", "majorStatus":"Open", "imgURL":"img/o.jpg", "alt":"Ocean"}
-  ];
-
 
 // creates card for majors, need to add ability to take data from json for content and add client side routing to the links
 // Prop name is expected to be majorCard, and represent a single major object
