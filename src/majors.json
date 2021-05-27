@@ -1,6 +1,6 @@
 [
     {"majorName": "Aquatic and Fishery Sciences", "minor": true, "degreeType": "B.S.", "majorStatus":"open", "imgURL":"img/fish.jpg", "alt":"fish in the ocean"},
-    {"majorName": "Environmental Science & Terrestrail Resource Management", "minor": true, "degreeType": "B.S.", "majorStatus":"open", "imgURL":"img/atmosphere.jpg", "alt":"clouds"},
+    {"majorName": "Environmental Science & Terrestrail Resource Management", "minor": true, "degreeType": "B.S.", "majorStatus":"open", "imgURL":"img/resource.jpg", "alt":"clouds"},
     {"majorName": "Atmospheric Sciences", "minor": true, "degreeType": "B.S.", "majorStatus": "Minimum major", "imgURL":"img/atmosphere.jpg", "alt":"clouds"},
     {"majorName": "Environmental Studies", "minor": true, "degreeType": "B.A.", "majorStatus": "open", "imgURL":"img/hill.jpg", "alt":"a hill with windmills"},
     {"majorName": "Bioresource Science and Engineering", "minor": true, "degreeType": "B.S.", "majorStatus":"Capacity-constrained major", "imgURL":"img/bioresource.jpg", "alt":"laboratory tubes"},
