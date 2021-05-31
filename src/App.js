@@ -20,23 +20,19 @@ const uiConfig = {
 export default function App(props) {
   const [user, setUser] = useState(undefined);
   useEffect(() => {
-    //listen for changes to the authstate (looged in or not)
     const authUnregisterFunction = firebase.auth().onAuthStateChanged((firebaseUser) => {
       if (firebaseUser) {
         setUser(firebaseUser);
-      } else { //not defined 
+      } else { 
         setUser(null)
         setIsLoading(false);
       }
     })
-    return function cleanup() { //what to do when doen loading 
-      authUnregisterFunction() //actually unregister me
+    return function cleanup() { 
+      authUnregisterFunction()
     }
-  }, []) //only run hook on first load
+  }, [])
 
-  const handleSignOut = () => {
-    firebase.auth().signOut()
-  }
 
   let content = null;
   if (!user) {
