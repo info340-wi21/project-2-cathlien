@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch, useParams, Link } from 'react-router-dom';
 
 export default function App(props) {
@@ -8,7 +8,7 @@ export default function App(props) {
       <HomePage majors={props.majors} />
     </Route>
     <Route exact path="/major/:majorName">
-      <MajorPage />
+      <MajorPage content={props.content}/>
     </Route>
     </Switch>
   </BrowserRouter>;
@@ -33,7 +33,25 @@ export function MajorPage(props) {
     <PurpleBlock name={majorName}/>
     <MainNav />
     <SideNav />
+    <main>
+      <MajorImages content={props.content}/>
+      <Overview content={props.content}/>
+    </main>
   </div>
+}
+
+export function MajorImages(props) {
+  let content = props.content[0];
+  return <div><img className="major-img small-img" src={content.smallImg} alt={content.smallAlt}/>
+  <img className="major-img big-img" src={content.bigImg} alt={content.bigAlt} /></div>;
+}
+
+export function Overview(props) {
+  let content = props.content[0];
+  return <section>
+    <h4 id="Overview">Overview</h4>
+    <p>{content.overview}</p>
+  </section>
 }
 
 export function TopHeader() {
@@ -86,6 +104,14 @@ export function Filter() {
 // creates card for majors, need to add ability to take data from json for content and add client side routing to the links
 // Prop name is expected to be majorCard, and represent a single major object
 export function MajorCard(props) {
+
+    const [redirectTo, setRedirectTo] = useState(undefined);
+    const handleClick = () => {
+      console.log("You clicked on", props.pet.name);
+      setRedirectTo(true);
+    }
+
+
     let majorCard = props.majorCard;
     
     // Classes for major card, used for sorting
@@ -99,6 +125,7 @@ export function MajorCard(props) {
     if (majorCard.minor === true) {
       degreeInfo = degreeInfo + ", Minor";
     }
+    
 
     return (
       <div className={cardClasses}>
@@ -126,7 +153,7 @@ export function CardList(props) {
 }
 
 /* Can add props for image citations for major individual pages later on to this */
-export function Footer() {
+export function Footer(props) {
   return <footer className="text-center">
   <p>
       Authors: Catherine Lien, Jessie Chen, Jesse Sershon, Jason Jung. Information from <a
