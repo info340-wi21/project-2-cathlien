@@ -1,12 +1,14 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
-
+import { BrowserRouter, Route, Switch, useParams, Link } from 'react-router-dom';
 
 export default function App(props) {
   return <BrowserRouter>
     <Switch>
     <Route exact path="/" >
       <HomePage majors={props.majors} />
+    </Route>
+    <Route exact path="/major/:majorName">
+      <MajorPage />
     </Route>
     </Switch>
   </BrowserRouter>;
@@ -15,12 +17,23 @@ export default function App(props) {
 export function HomePage(props) {
   return <div>
     <header><TopHeader /></header>
-    <PurpleBlock />
+    <PurpleBlock name={"Undergraduate Programs"}/>
     <MainNav />
     <Filter />
     <CardList cards={props.majors} />
     <Footer />
     </div>;
+}
+
+export function MajorPage(props) {
+  const params = useParams();
+  let majorName = params.majorName;
+  return <div>
+    <header><TopHeader /></header>
+    <PurpleBlock name={majorName}/>
+    <MainNav />
+    <SideNav />
+  </div>
 }
 
 export function TopHeader() {
@@ -32,15 +45,26 @@ export function TopHeader() {
     </div>
 }
 
-export function PurpleBlock() {
+export function PurpleBlock(props) {
   return <div className="purple-block" aria-label="a purple rectangular block">
-    <h3>Undergraduate Programs</h3>
+    <h3>{props.name}</h3>
   </div>;
 }
 
 /* Doesn't link to anything at the moment */
 export function MainNav() {
   return <div className="main-nav" role="navigation"><a href="resources.html">Additional resources</a></div>;
+}
+
+export function SideNav() {
+  return <nav>
+        <div className="sidenav" role="navigation">
+            <a href="#Overview">Overview</a>
+            <a href="#Bachelor of Sciences">Bachelor of Sciences</a>
+            <a href="#Minor">Minor</a>
+            <Link to="/">Return to Home Page</Link>
+          </div>
+    </nav>;
 }
 
 export function Filter() {
