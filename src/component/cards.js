@@ -1,3 +1,6 @@
+import React, { useState } from "react";
+import { Redirect } from 'react-router-dom';
+
 export function MajorCard(props) {
 
     const [redirectTo, setRedirectTo] = useState(undefined);

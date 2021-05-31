@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Route, Switch, useParams } from 'react-router-dom';
 import firebase from "firebase/app";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { MainNav } from "./component/pageElement";
@@ -7,10 +7,11 @@ import { SideNav } from "./component/pageElement";
 import { PurpleBlock } from "./component/pageElement";
 import { TopHeader } from "./component/pageElement";
 import { Overview } from "./component/pageElement";
-import { MajorImages } from "./component/Majorimages";
+import { MajorImages } from "./component/MajorImages";
 import { CardList } from "./component/cards";
 import { Footer } from "./component/Footers";
-import { MajorFooter } from "./component/Footer";
+import { MajorFooter } from "./component/MajorFooter";
+import { Filter } from "./component/filter";
 
 const uiConfig = {
   signInOptions: [
@@ -35,7 +36,6 @@ export default function App(props) {
         setUser(firebaseUser);
       } else { 
         setUser(null)
-        setIsLoading(false);
       }
     })
     return function cleanup() { 

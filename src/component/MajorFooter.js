@@ -23,3 +23,4 @@ export function MajorFooter(props) {
           href="https://unsplash.com/s/photos/green-leaf"><cite>Unsplash</cite></a>
   </p>
 </footer>;
+}
