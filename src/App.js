@@ -1,6 +1,18 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+
 
 export default function App(props) {
+  return <BrowserRouter>
+    <Switch>
+    <Route exact path="/" >
+      <HomePage majors={props.majors} />
+    </Route>
+    </Switch>
+  </BrowserRouter>;
+}
+
+export function HomePage(props) {
   return <div>
     <header><TopHeader /></header>
     <PurpleBlock />

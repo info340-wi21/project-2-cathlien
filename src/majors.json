@@ -3,7 +3,7 @@
     {"majorName": "Atmospheric Sciences", "minor": true, "degreeType": "B.S.", "majorStatus": "Minimum major", "imgURL":"img/atmosphere.jpg", "alt":"clouds"},
     {"majorName": "Bioresource Science and Engineering", "minor": true, "degreeType": "B.S.", "majorStatus":"Capacity-constrained major", "imgURL":"img/bioresource.jpg", "alt":"laboratory tubes"},
     {"majorName": "Earth and Space Sciences", "minor": true, "degreeType": "B.S., B.A.", "majorStatus":"open", "imgURL":"img/earth.jpg", "alt":"earth from space"},
-    {"majorName": "Environmental Science & Terrestrail Resource Management", "minor": true, "degreeType": "B.S.", "majorStatus":"open", "imgURL":"img/resource.jpg", "alt":"clouds"},
+    {"majorName": "Environmental Science & Terrestrial Resource Management", "minor": true, "degreeType": "B.S.", "majorStatus":"open", "imgURL":"img/resource.jpg", "alt":"clouds"},
     {"majorName": "Environmental Studies", "minor": true, "degreeType": "B.A.", "majorStatus": "open", "imgURL":"img/hill.jpg", "alt":"a hill with windmills"},
     {"majorName": "Marine Biology", "minor": true, "degreeType": "B.S.", "majorStatus":"Open", "imgURL":"img/marine bio.jpg", "alt":"marine biology"},
     {"majorName": "Oceanography", "minor": true, "degreeType": "B.S., B.A.", "majorStatus":"Open", "imgURL":"img/o.jpg", "alt":"Ocean"}
