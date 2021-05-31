@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Route, Switch, useParams, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, useParams, Link, Redirect } from 'react-router-dom';
 
 export default function App(props) {
   return <BrowserRouter>
@@ -34,20 +34,31 @@ export function MajorPage(props) {
     <MainNav />
     <SideNav />
     <main>
-      <MajorImages content={props.content}/>
-      <Overview content={props.content}/>
+      <MajorImages name={majorName} content={props.content}/>
+      <Overview name={majorName} content={props.content}/>
     </main>
+    <MajorFooter name={majorName} content={props.content}/>
   </div>
 }
 
 export function MajorImages(props) {
-  let content = props.content[0];
+  let content;
+  props.content.forEach((major) => {
+    if (major.majorName === props.name) {
+      content = major;
+    }
+  })
   return <div><img className="major-img small-img" src={content.smallImg} alt={content.smallAlt}/>
   <img className="major-img big-img" src={content.bigImg} alt={content.bigAlt} /></div>;
 }
 
 export function Overview(props) {
-  let content = props.content[0];
+  let content;
+  props.content.forEach((major) => {
+    if (major.majorName === props.name) {
+      content = major;
+    }
+  })
   return <section>
     <h4 id="Overview">Overview</h4>
     <p>{content.overview}</p>
@@ -78,8 +89,6 @@ export function SideNav() {
   return <nav>
         <div className="sidenav" role="navigation">
             <a href="#Overview">Overview</a>
-            <a href="#Bachelor of Sciences">Bachelor of Sciences</a>
-            <a href="#Minor">Minor</a>
             <Link to="/">Return to Home Page</Link>
           </div>
     </nav>;
@@ -107,7 +116,7 @@ export function MajorCard(props) {
 
     const [redirectTo, setRedirectTo] = useState(undefined);
     const handleClick = () => {
-      console.log("You clicked on", props.pet.name);
+      console.log("You clicked on", props.majorCard.majorName);
       setRedirectTo(true);
     }
 
@@ -125,7 +134,11 @@ export function MajorCard(props) {
     if (majorCard.minor === true) {
       degreeInfo = degreeInfo + ", Minor";
     }
-    
+
+    if (redirectTo) {
+      let link = "/major/" + props.majorCard.majorName;
+      return <Redirect push to={link}/>
+    }
 
     return (
       <div className={cardClasses}>
@@ -135,7 +148,7 @@ export function MajorCard(props) {
         <div className="card-body">
           <h4 className="card-title text-center">{majorCard.majorName}</h4>
           <p className="card-text text-center"> {degreeInfo} </p>
-          <a href="aquatic.html" class="btn btn-outline-success" role="button">Learn more</a>
+          <div class="btn btn-outline-success" role="button" onClick={handleClick}>Learn more</div>
         </div>
         <div className="card-footer text-center text-muted">Image from <a
               href="https://unsplash.com/photos/TiTblwCHZFY"><cite>Unsplash</cite></a>
@@ -153,7 +166,7 @@ export function CardList(props) {
 }
 
 /* Can add props for image citations for major individual pages later on to this */
-export function Footer(props) {
+export function Footer() {
   return <footer className="text-center">
   <p>
       Authors: Catherine Lien, Jessie Chen, Jesse Sershon, Jason Jung. Information from <a
@@ -166,3 +179,31 @@ export function Footer(props) {
   </p>
 </footer>;
 }
+
+export function MajorFooter(props) {
+  let content;
+  props.content.forEach((major) => {
+    if (major.majorName === props.name) {
+      content = major;
+    }
+  })
+  return <footer className="text-center">
+  <p>
+      Authors: Catherine Lien, Jessie Chen, Jesse Sershon, Jason Jung. Information from <a
+          href="https://www.washington.edu/students/gencat/academic/college_environment.html">
+          <cite>UW Degree Program</cite>.</a> Favicon from
+      <a
+          href="https://www.iconfinder.com/icons/1936907/eco_environment_green_leaves_nature_recycle_recycling_icon">
+          <cite>Iconfinder</cite></a>. 
+          
+          Image of {content.smallAlt} from
+            <a href={content.smallLink}>
+            <cite>Unsplash</cite></a>. Image of {content.bigAlt} from <a href={content.bigLink}><cite>Unsplash</cite>.</a>
+            Cover image from <a href="https://unsplash.com/s/photos/green-leaf"><cite>Unsplash</cite></a>.
+          
+          Cover image from <a
+          href="https://unsplash.com/s/photos/green-leaf"><cite>Unsplash</cite></a>
+  </p>
+</footer>;
+}
+
