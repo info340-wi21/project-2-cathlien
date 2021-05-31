@@ -8,7 +8,6 @@ import { PurpleBlock } from "./component/pageElement";
 import { TopHeader } from "./component/pageElement";
 import { Overview } from "./component/pageElement";
 import { MajorImages } from "./component/Majorimages";
-import { MajorCard } from "./component/cards";
 import { CardList } from "./component/cards";
 import { Footer } from "./component/Footers";
 import { MajorFooter } from "./component/Footer";
