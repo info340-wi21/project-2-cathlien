@@ -1,23 +1,75 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Route, Switch, useParams, Link, Redirect } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import firebase from "firebase/app";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+const uiConfig = {
+  signInOptions: [
+    {
+      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      requireDisplayName: true,
+    },
+    firebase.auth.GoogleAuthProvider.PROVIER_ID
+  ],
+  credentialHelper: "none",
+  signInFlow: "popup",
+  callbacks: {
+    signInSuccessWithAuthResult: () => false
+  }
+};
 
 export default function App(props) {
-  return <BrowserRouter>
-    <Switch>
-    <Route exact path="/" >
-      <HomePage majors={props.majors} />
-    </Route>
-    <Route exact path="/major/:majorName">
-      <MajorPage content={props.content}/>
-    </Route>
-    </Switch>
-  </BrowserRouter>;
+  const [user, setUser] = useState(undefined);
+  useEffect(() => {
+    //listen for changes to the authstate (looged in or not)
+    const authUnregisterFunction = firebase.auth().onAuthStateChanged((firebaseUser) => {
+      if (firebaseUser) {
+        setUser(firebaseUser);
+      } else { //not defined 
+        setUser(null)
+        setIsLoading(false);
+      }
+    })
+    return function cleanup() { //what to do when doen loading 
+      authUnregisterFunction() //actually unregister me
+    }
+  }, []) //only run hook on first load
+
+  const handleSignOut = () => {
+    firebase.auth().signOut()
+  }
+
+  let content = null;
+  if (!user) {
+    content = (
+      <div className="container">
+        <h1>sign up</h1>
+        <StyledFirebaseAuth
+          uiConfig={uiConfig}
+          firebaseAuth={firebase.auth()}
+        />
+      </div>
+    );
+  } else {
+    content = (
+      <div className="container">
+          <BrowserRouter>
+            <Switch>
+              <Route exact path="/" >
+                <HomePage majors={props.majors} />
+              </Route>
+            </Switch>
+          </BrowserRouter>;
+      </div>
+    );
+  }
+
+  return <div className="container">{content}</div>;
 }
 
 export function HomePage(props) {
   return <div>
     <header><TopHeader /></header>
-    <PurpleBlock name={"Undergraduate Programs"}/>
+    <PurpleBlock />
     <MainNav />
     <Filter />
     <CardList cards={props.majors} />
@@ -25,44 +77,14 @@ export function HomePage(props) {
     </div>;
 }
 
-export function MajorPage(props) {
-  const params = useParams();
-  let majorName = params.majorName;
-  return <div>
-    <header><TopHeader /></header>
-    <PurpleBlock name={majorName}/>
-    <MainNav />
-    <SideNav />
-    <main>
-      <MajorImages name={majorName} content={props.content}/>
-      <Overview name={majorName} content={props.content}/>
-    </main>
-    <MajorFooter name={majorName} content={props.content}/>
-  </div>
-}
-
-export function MajorImages(props) {
-  let content;
-  props.content.forEach((major) => {
-    if (major.majorName === props.name) {
-      content = major;
-    }
-  })
-  return <div><img className="major-img small-img" src={content.smallImg} alt={content.smallAlt}/>
-  <img className="major-img big-img" src={content.bigImg} alt={content.bigAlt} /></div>;
-}
-
-export function Overview(props) {
-  let content;
-  props.content.forEach((major) => {
-    if (major.majorName === props.name) {
-      content = major;
-    }
-  })
-  return <section>
-    <h4 id="Overview">Overview</h4>
-    <p>{content.overview}</p>
-  </section>
+export function aquaticPage(props){
+  return(
+    <div>
+      <header><majorHeader /></header>
+      <MajorBlock major={props.major}/>
+      <AquaticText />
+    </div>
+  )
 }
 
 export function TopHeader() {
@@ -74,24 +96,16 @@ export function TopHeader() {
     </div>
 }
 
-export function PurpleBlock(props) {
+export function PurpleBlock() {
   return <div className="purple-block" aria-label="a purple rectangular block">
-    <h3>{props.name}</h3>
+    <h3>Undergraduate Programs</h3>
   </div>;
 }
 
 /* Doesn't link to anything at the moment */
 export function MainNav() {
-  return <div className="main-nav" role="navigation"><a href="resources.html">Additional resources</a></div>;
-}
-
-export function SideNav() {
-  return <nav>
-        <div className="sidenav" role="navigation">
-            <a href="#Overview">Overview</a>
-            <Link to="/">Return to Home Page</Link>
-          </div>
-    </nav>;
+  return <div className="main-nav" role="navigation"><a href="resources.html">Additional resources</a>
+  </div>;
 }
 
 export function Filter() {
@@ -113,14 +127,6 @@ export function Filter() {
 // creates card for majors, need to add ability to take data from json for content and add client side routing to the links
 // Prop name is expected to be majorCard, and represent a single major object
 export function MajorCard(props) {
-
-    const [redirectTo, setRedirectTo] = useState(undefined);
-    const handleClick = () => {
-      console.log("You clicked on", props.majorCard.majorName);
-      setRedirectTo(true);
-    }
-
-
     let majorCard = props.majorCard;
     
     // Classes for major card, used for sorting
@@ -135,11 +141,6 @@ export function MajorCard(props) {
       degreeInfo = degreeInfo + ", Minor";
     }
 
-    if (redirectTo) {
-      let link = "/major/" + props.majorCard.majorName;
-      return <Redirect push to={link}/>
-    }
-
     return (
       <div className={cardClasses}>
         <img
@@ -148,7 +149,7 @@ export function MajorCard(props) {
         <div className="card-body">
           <h4 className="card-title text-center">{majorCard.majorName}</h4>
           <p className="card-text text-center"> {degreeInfo} </p>
-          <div class="btn btn-outline-success" role="button" onClick={handleClick}>Learn more</div>
+          <a href="aquatic.html" class="btn btn-outline-success" role="button">Learn more</a>
         </div>
         <div className="card-footer text-center text-muted">Image from <a
               href="https://unsplash.com/photos/TiTblwCHZFY"><cite>Unsplash</cite></a>
@@ -179,31 +180,3 @@ export function Footer() {
   </p>
 </footer>;
 }
-
-export function MajorFooter(props) {
-  let content;
-  props.content.forEach((major) => {
-    if (major.majorName === props.name) {
-      content = major;
-    }
-  })
-  return <footer className="text-center">
-  <p>
-      Authors: Catherine Lien, Jessie Chen, Jesse Sershon, Jason Jung. Information from <a
-          href="https://www.washington.edu/students/gencat/academic/college_environment.html">
-          <cite>UW Degree Program</cite>.</a> Favicon from
-      <a
-          href="https://www.iconfinder.com/icons/1936907/eco_environment_green_leaves_nature_recycle_recycling_icon">
-          <cite>Iconfinder</cite></a>. 
-          
-          Image of {content.smallAlt} from
-            <a href={content.smallLink}>
-            <cite>Unsplash</cite></a>. Image of {content.bigAlt} from <a href={content.bigLink}><cite>Unsplash</cite>.</a>
-            Cover image from <a href="https://unsplash.com/s/photos/green-leaf"><cite>Unsplash</cite></a>.
-          
-          Cover image from <a
-          href="https://unsplash.com/s/photos/green-leaf"><cite>Unsplash</cite></a>
-  </p>
-</footer>;
-}
-
