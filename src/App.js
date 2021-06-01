@@ -69,7 +69,7 @@ export default function App(props) {
       </BrowserRouter>);
   }
 
-  return <div className="container">{content}</div>;
+  return <div>{content}</div>;
 }
 
 export function HomePage(props) {

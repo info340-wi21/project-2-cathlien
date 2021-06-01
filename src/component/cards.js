@@ -51,7 +51,7 @@ export function CardList(props) {
   let element = cards.map((card) => {
     return <MajorCard key={card.majorName} majorCard={card} />;
   })
-  return <div class="container"><div class="card-columns">{element}</div></div>
+  return <div className="container"><div className="card-columns">{element}</div></div>
 }
 
 /* Can add props for image citations for major individual pages later on to this */
