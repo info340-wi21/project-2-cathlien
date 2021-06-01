@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch, useParams } from 'react-router-dom';
-import firebase from "firebase/app";
+import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { MainNav } from "./component/pageElement";
 import { SideNav } from "./component/pageElement";
-import { PurpleBlock } from "./component/pageElement";
+import { PurpleBlock } from "./component/pageElement";  
 import { TopHeader } from "./component/pageElement";
 import { Overview } from "./component/pageElement";
 import { MajorImages } from "./component/MajorImages";
@@ -19,7 +19,7 @@ const uiConfig = {
       provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
       requireDisplayName: true,
     },
-    firebase.auth.GoogleAuthProvider.PROVIER_ID
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID
   ],
   credentialHelper: "none",
   signInFlow: "popup",
