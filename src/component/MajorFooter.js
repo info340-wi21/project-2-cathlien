@@ -1,3 +1,4 @@
+// MajorFooter returns a footer element forthe major pages containing author information, citations for information, and citations for images and icons.
 export function MajorFooter(props) {
   let content;
   props.content.forEach((major) => {

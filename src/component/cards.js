@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Redirect } from 'react-router-dom';
 
+
+// MajorCard returns a MajorCard component that is made up of several divs holding an image, a header, and information about the major.
 export function MajorCard(props) {
 
     const [redirectTo, setRedirectTo] = useState(undefined);
@@ -46,6 +48,7 @@ export function MajorCard(props) {
     )
 }
 
+// CardList returns a set of card components from MajorCard based on the dataset of information passed in. 
 export function CardList(props) {
   let cards = props.cards;
   let element = cards.map((card) => {

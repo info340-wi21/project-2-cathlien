@@ -1,9 +1,12 @@
 import React from 'react';
 import Select from 'react-select';
-import filterOptions from './filterOptions.json'
+import filterOptions from './filterOptions.json' // an array of objects containing informaiton for the filter function
 
 let dropDownOptions = filterOptions
 
+// Filter function returns the filter componenet from react-select. 
+// Includes options to filter majors.
+// Template for this function from https://react-select.com/home
 export function Filter() {
     return (
         <div className=" justify-content-center">
@@ -20,6 +23,7 @@ export function Filter() {
     )
   }
 
+  // Old filter function
 //   export function Filter() {
 //     return <form className="filters">
 //     <label for="filter"><p className="filter-label">Filter programs by: </p></label>

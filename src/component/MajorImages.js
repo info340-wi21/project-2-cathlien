@@ -1,3 +1,4 @@
+// Returns images for major cards and pages.
 export function MajorImages(props) {
   let content;
   props.content.forEach((major) => {

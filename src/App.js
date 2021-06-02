@@ -13,6 +13,7 @@ import { Footer } from "./component/Footers";
 import { MajorFooter } from "./component/MajorFooter";
 import { Filter } from "./component/filter";
 
+// uiConfig used for firebase authentication
 const uiConfig = {
   signInOptions: [
     {
@@ -28,6 +29,7 @@ const uiConfig = {
   }
 };
 
+// Returns the single page app representing the UW College of Environment information.
 export default function App(props) {
   const [user, setUser] = useState(undefined);
   useEffect(() => {
@@ -72,6 +74,7 @@ export default function App(props) {
   return <div>{content}</div>;
 }
 
+// HomePage returns the homepage element with a header, the purple block, the main nav bar, the filter function, the card list representing all of the majorCards, and a footer.
 export function HomePage(props) {
   return <div>
     <header><TopHeader /></header>
@@ -83,6 +86,7 @@ export function HomePage(props) {
     </div>;
 }
 
+// MajorPage is a template for each individual major page, which contains overview information and an image about the major.
 export function MajorPage(props) {
   const params = useParams();
   let majorName = params.majorName;

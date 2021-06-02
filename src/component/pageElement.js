@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 
+// TopHeader returns a few elements containing glossary information for the header.
 export function TopHeader() {
     return <div className="top" >
       <h1>
@@ -9,16 +10,19 @@ export function TopHeader() {
       </div>
   }
 
+  // PurpleBlock returns a large purple div block containing header text. 
   export function PurpleBlock(props) {
     return <div className="purple-block" aria-label="a purple rectangular block">
       <h3>{props.name}</h3>
     </div>;
   }
 
+  // MainNav returns the nav bar element at the top of the page.
   export function MainNav() {
     return <div className="main-nav" role="navigation"><a href="resources.html">Additional resources</a></div>;
   }
 
+  // SideNav returns a nav column used on the individual major pages.
   export function SideNav() {
     return <nav>
           <div className="sidenav" role="navigation">
@@ -28,6 +32,7 @@ export function TopHeader() {
       </nav>;
   }
 
+  // Overview returns a set of text containing the overview information for that major page.
   export function Overview(props) {
     let content;
     props.content.forEach((major) => {
