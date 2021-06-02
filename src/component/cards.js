@@ -54,17 +54,3 @@ export function CardList(props) {
   return <div className="container"><div className="card-columns">{element}</div></div>
 }
 
-/* Can add props for image citations for major individual pages later on to this */
-export function Footer() {
-  return <footer className="text-center">
-  <p>
-      Authors: Catherine Lien, Jessie Chen, Jesse Sershon, Jason Jung. Information from <a
-          href="https://www.washington.edu/students/gencat/academic/college_environment.html">
-          <cite>UW Degree Program</cite>.</a> Favicon from
-      <a
-          href="https://www.iconfinder.com/icons/1936907/eco_environment_green_leaves_nature_recycle_recycling_icon">
-          <cite>Iconfinder</cite></a>. Cover image from <a
-          href="https://unsplash.com/s/photos/green-leaf"><cite>Unsplash</cite></a>
-  </p>
-</footer>;
-}
