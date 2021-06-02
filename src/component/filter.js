@@ -1,14 +1,8 @@
 import React from 'react';
 import Select from 'react-select';
+import filterOptions from './filterOptions.json'
 
-let dropDownOptions = [
-{ value: 'undefined', label: 'No filter' },
-{ value: 'bachelor of science', label: 'Bachelor of Sciences' },
-{ value: 'bachelor of arts', label: 'Bachelor of Arts' },
-{ value: 'capacity-constrained major', label: 'Capacity-constrained major' },
-{ value: 'minimum requirements major', label: 'Minimum requirements major' },
-{ value: 'open major', label: 'Open major' }
-]
+let dropDownOptions = filterOptions
 
 export function Filter() {
     return (
