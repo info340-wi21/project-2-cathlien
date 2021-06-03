@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from 'react-router-dom';
-
+import favoriteList from "./favoriteList";
 
 // MajorCard returns a MajorCard component that is made up of several divs holding an image, a header, and information about the major.
 export function MajorCard(props) {
@@ -9,6 +9,11 @@ export function MajorCard(props) {
     const handleClick = () => {
       console.log("You clicked on", props.majorCard.majorName);
       setRedirectTo(true);
+    }
+
+    const [favorite, setFavorite] = useState(undefined)
+    const handleFavorite = () => {
+      setFavorite(true)
     }
 
 
@@ -31,7 +36,7 @@ export function MajorCard(props) {
       return <Redirect push to={link}/>
     }
 
-    return (
+    let fullCompenent =  (
       <div className={cardClasses}>
         <img
          className="card-img-top" src={majorCard.imgURL} alt={majorCard.alt}> 
@@ -40,12 +45,20 @@ export function MajorCard(props) {
           <h4 className="card-title text-center">{majorCard.majorName}</h4>
           <p className="card-text text-center"> {degreeInfo} </p>
           <div class="btn btn-outline-success" role="button" onClick={handleClick}>Learn more</div>
+          <div class="btn btn-outline-success" role="button" onClick={handleFavorite}>Add to favorites</div>
         </div>
         <div className="card-footer text-center text-muted">Image from <a
               href="https://unsplash.com/photos/TiTblwCHZFY"><cite>Unsplash</cite></a>
         </div>
       </div>
     )
+
+    if (favorite == true) {
+      favoriteList.majors.push(fullCompenent)
+      console.log(favoriteList)
+    }
+
+    return(fullCompenent);
 }
 
 // CardList returns a set of card components from MajorCard based on the dataset of information passed in. 
