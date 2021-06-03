@@ -12,7 +12,8 @@ import { CardList } from "./component/cards";
 import { Footer } from "./component/Footers";
 import { MajorFooter } from "./component/MajorFooter";
 import { Filter } from "./component/filter";
-import { favoriteMajors } from "./component/favoriteMajors"
+import { favoriteMajors } from "./component/favoriteMajors";
+import { checkList } from "./component/checkList";
 
 // uiConfig used for firebase authentication
 const uiConfig = {
@@ -72,6 +73,7 @@ export default function App(props) {
           <Route exact path="/favorites">
             <favoritePage />
           </Route>
+          <Route exact path="/" render={props => <checkList />} />
          </Switch>
       </BrowserRouter>);
   }
