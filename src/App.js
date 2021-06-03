@@ -69,6 +69,9 @@ export default function App(props) {
           <Route exact path="/major/:majorName">
              <MajorPage content={props.content}/>
           </Route>
+          <Route exact path="/favorites">
+            <favoritePage />
+          </Route>
          </Switch>
       </BrowserRouter>);
   }

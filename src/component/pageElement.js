@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import React, { useState } from "react";
 
 // TopHeader returns a few elements containing glossary information for the header.
 export function TopHeader() {
@@ -19,7 +20,25 @@ export function TopHeader() {
 
   // MainNav returns the nav bar element at the top of the page.
   export function MainNav() {
-    return <div className="main-nav" role="navigation"><a href="resources.html">Additional resources</a></div>;
+    const [redirectTo, setRedirectTo] = useState(undefined);
+    const handleClick = () => {
+      setRedirectTo(true);
+    }
+  
+    if (redirectTo) {
+      return <Redirect push to="/favorites"/>
+    }
+
+    return  (
+        <div className="main-nav" role="navigation">
+          <a href="resources.html">
+            Additional resources
+          </a>
+          <p onClick={handleClick}>
+            Favorites
+          </p>
+        </div>
+    )
   }
 
   // SideNav returns a nav column used on the individual major pages.
