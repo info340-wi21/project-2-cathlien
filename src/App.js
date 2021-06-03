@@ -12,8 +12,7 @@ import { CardList } from "./component/cards";
 import { Footer } from "./component/Footers";
 import { MajorFooter } from "./component/MajorFooter";
 import { Filter } from "./component/filter";
-import { favoriteMajors } from "./component/favoriteMajors";
-import { checkList } from "./component/checkList";
+import { FavoritePage } from "./component/FavoritePage"
 
 // uiConfig used for firebase authentication
 const uiConfig = {
@@ -71,7 +70,7 @@ export default function App(props) {
              <MajorPage content={props.content}/>
           </Route>
           <Route exact path="/favorites">
-            <favoritePage />
+            <FavoritePage />
           </Route>
           <Route exact path="/" render={props => <checkList />} />
          </Switch>
@@ -80,6 +79,7 @@ export default function App(props) {
 
   return <div>{content}</div>;
 }
+
 
 // HomePage returns the homepage element with a header, the purple block, the main nav bar, the filter function, the card list representing all of the majorCards, and a footer.
 export function HomePage(props) {
@@ -110,15 +110,4 @@ export function MajorPage(props) {
   </div>;
 }
 
-export function favoritePage() {
-  return ( 
-  <div>
-  <header><TopHeader /></header>
-  <PurpleBlock name={"Favorited Programs"}/>
-  <MainNav />
-  <Filter />
-  <favoriteMajors />
-  <Footer />
-  </div>
-  );
-}
+

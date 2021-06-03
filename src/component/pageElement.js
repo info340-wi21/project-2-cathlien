@@ -31,12 +31,9 @@ export function TopHeader() {
 
     return  (
         <div className="main-nav" role="navigation">
-          <a href="resources.html">
-            Additional resources
-          </a>
-          <p onClick={handleClick}>
+          <a onClick={handleClick}>
             Favorites
-          </p>
+          </a>
         </div>
     )
   }

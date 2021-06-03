@@ -1,6 +1,6 @@
 import favoriteList from './favoriteList'
 
-export function favoriteMajors() {
+export function FavoriteMajors() {
     return (
         <div className="container">
             <div className="card-columns">
