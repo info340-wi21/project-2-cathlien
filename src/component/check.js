@@ -1,31 +1,31 @@
 import { useState } from "react";
 
-export function Task(props) {
-    const thisCheck = props.task
+export function CheckOff(props) {
+    const thisCheck = props.check
     
     const [taskState, setState] = useState(thisCheck.complete)
     
-    let className = '';
+    let changeFont = '';
     if(thisCheck.complete) {
-        className = 'bg-success';
+        changeFont = 'bg-success';
     } else {
-        className = 'bg-danger';
+        changeFont = 'bg-danger';
     }
 
     const handleClick = (event) => {
         setState(!taskState)
     }
     return (
-        <li className={className} onClick={handleClick}>
+        <li className={changeFont} onClick={handleClick}>
             {thisCheck.checkText}
         </li>
     )
 }
 
-export default function TaskList(props) {
-    let checks = props.tasks.map((eachCheck) => {
-        let singleTaskElem = <Check key={eachCheck.id} task={eachCheck} />
-        return singleTaskElem;
+export default function Progress(props) {
+    let checks = props.app.map((eachCheck) => {
+        let thisCheck = <Check key={eachCheck.id} check={eachCheck} />
+        return thisCheck;
     })
     return (
         <ol>
