@@ -13,6 +13,7 @@ import { Footer } from "./component/Footers";
 import { MajorFooter } from "./component/MajorFooter";
 import { Filter } from "./component/filter";
 import { FavoritePage } from "./component/FavoritePage"
+import { checkBox } from "./component/checkBox"
 
 // uiConfig used for firebase authentication
 const uiConfig = {
@@ -107,6 +108,17 @@ export function MajorPage(props) {
       <Overview name={majorName} content={props.content}/>
     </main>
     <MajorFooter name={majorName} content={props.content}/>
+  </div>;
+}
+
+export function CheckListPage(props) {
+  return <div>
+    <header><TopHeader /></header>
+    <MainNav />
+    <SideNav />
+    <main>
+      <checkBox app={props.app} />
+    </main>
   </div>;
 }
 
