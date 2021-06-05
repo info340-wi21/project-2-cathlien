@@ -55,7 +55,7 @@ export function MajorCard(props) {
 
 
     // builds the array of favorites for the favorite page
-    if (favorite == true) {
+    if (favorite === true) {
       favoriteList.push(fullCompenent)
       console.log(favoriteList)
     }
