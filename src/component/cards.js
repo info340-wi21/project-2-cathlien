@@ -16,6 +16,11 @@ export function MajorCard(props) {
       setFavorite(true)
     }
 
+    const [unfavorite, setUnfavorite] = useState(undefined)
+    const handleUnfavorite = () => {
+      setUnfavorite(true)
+    }
+
 
     let majorCard = props.majorCard;
     
@@ -36,7 +41,7 @@ export function MajorCard(props) {
       return <Redirect push to={link}/>
     }
 
-    let fullCompenent =  (
+    let homePageCard =  (
       <div className={cardClasses}>
         <img
          className="card-img-top" src={majorCard.imgURL} alt={majorCard.alt}> 
@@ -53,14 +58,34 @@ export function MajorCard(props) {
       </div>
     )
 
+    let favoriteCard =  (
+      <div className={cardClasses}>
+        <img
+         className="card-img-top" src={majorCard.imgURL} alt={majorCard.alt}> 
+        </img>
+        <div className="card-body">
+          <h4 className="card-title text-center">{majorCard.majorName}</h4>
+          <p className="card-text text-center"> {degreeInfo} </p>
+          <div class="btn btn-outline-success" role="button" onClick={handleClick}>Learn more</div>
+          <div class="btn btn-outline-success" role="button" onClick={handleUnfavorite}>Remove from favorites</div>
+        </div>
+        <div className="card-footer text-center text-muted">Image from <a
+              href="https://unsplash.com/photos/TiTblwCHZFY"><cite>Unsplash</cite></a>
+        </div>
+      </div>
+    )
 
     // builds the array of favorites for the favorite page
     if (favorite === true) {
-      favoriteList.push(fullCompenent)
+      favoriteList.push(favoriteCard)
       console.log(favoriteList)
     }
 
-    return(fullCompenent);
+    if (unfavorite === true) {
+      favoriteList.pop()
+    }
+
+    return(homePageCard);
 }
 
 // CardList returns a set of card components from MajorCard based on the dataset of information passed in. 
