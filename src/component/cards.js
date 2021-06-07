@@ -1,3 +1,4 @@
+import { render } from "@testing-library/react";
 import React, { useState } from "react";
 import { Redirect } from 'react-router-dom';
 import favoriteList from "./favoriteList";
@@ -82,7 +83,12 @@ export function MajorCard(props) {
     }
 
     if (unfavorite === true) {
-      favoriteList.pop()
+      for (let i = 0; i < favoriteList.length(); i++) {
+        if (favoriteCard === favoriteList[i]) {
+          favoriteList.splice(i, 1);
+          render();
+        }
+      }
     }
 
     return(homePageCard);
