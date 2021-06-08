@@ -118,6 +118,7 @@ export function MajorPage(props) {
 export function CheckListPage(props) {
   return <div>
     <header><TopHeader /></header>
+    <PurpleBlock name="Progress CheckList" />
     <MainNav />
     <ReturnHome />
     <main>
