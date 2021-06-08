@@ -13,7 +13,7 @@ import { Footer } from "./component/Footers";
 import { MajorFooter } from "./component/MajorFooter";
 import { Filter } from "./component/filter";
 import { FavoritePage } from "./component/FavoritePage"
-import { checkBox } from "./component/checkBox"
+import { ProgressList } from "./component/check.js";
 import { ReturnHome } from "./component/pageElement";
 
 
@@ -76,6 +76,7 @@ export default function App(props) {
             <FavoritePage />
           </Route>
           <Route exact path="/progress">
+          <CheckListPage progresses={props.progresses}/>
             </Route> 
          </Switch>
       </BrowserRouter>);
@@ -120,7 +121,7 @@ export function CheckListPage(props) {
     <MainNav />
     <ReturnHome />
     <main>
-      <checkBox app={props.app} />
+      <ProgressList progresses={props.progresses} />
     </main>
   </div>;
 }

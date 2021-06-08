@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function CheckOff(props) {
+export function Check(props) {
     const thisCheck = props.check
     
     const [taskState, setState] = useState(thisCheck.complete)
@@ -22,9 +22,9 @@ export function CheckOff(props) {
     )
 }
 
-export default function Progress(props) {
-    let checks = props.app.map((eachCheck) => {
-        let thisCheck = <Check key={eachCheck.id} check={eachCheck} />
+export function ProgressList(props) {
+    let checks = props.progresses.map((eachCheck) => {
+        let thisCheck = <Check key={eachCheck.id} progress={eachCheck} />
         return thisCheck;
     })
     return (
