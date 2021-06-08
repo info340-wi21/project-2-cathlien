@@ -8,6 +8,11 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 
+const sample_progress = [
+  { id: 1, checkText: "Personal Statement", complete:false},
+  { id: 2, checkText: "Complete required courses", complete:false},
+  { id: 3, checkText: "Start application", complete:false}
+];
 const firebaseConfig = {
     apiKey: "AIzaSyAHKWZKdKFFvC2dEKbgAKffJer_RblZzu8",
     authDomain: "fitfriend-d7148.firebaseapp.com",
@@ -20,5 +25,5 @@ const firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
 
 
-ReactDOM.render(<App majors={MAJORS} content={CONTENT}/>, document.getElementById('root'));
+ReactDOM.render(<App majors={MAJORS} content={CONTENT} progresses={sample_progress}/>, document.getElementById('root'));
 

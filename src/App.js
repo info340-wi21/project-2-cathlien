@@ -36,6 +36,7 @@ const uiConfig = {
 
 // Returns the single page app representing the UW College of Environment information.
 export default function App(props) {
+  console.log("app", props);
   const [user, setUser] = useState(undefined);
   useEffect(() => {
     const authUnregisterFunction = firebase.auth().onAuthStateChanged((firebaseUser) => {
@@ -114,7 +115,6 @@ export function MajorPage(props) {
     <MajorFooter name={majorName} content={props.content}/>
   </div>;
 }
-
 export function CheckListPage(props) {
   return <div>
     <header><TopHeader /></header>
