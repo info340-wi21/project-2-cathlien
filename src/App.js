@@ -14,6 +14,8 @@ import { MajorFooter } from "./component/MajorFooter";
 import { Filter } from "./component/filter";
 import { FavoritePage } from "./component/FavoritePage"
 import { checkBox } from "./component/checkBox"
+import { ReturnHome } from "./component/pageElement";
+
 
 // uiConfig used for firebase authentication
 const uiConfig = {
@@ -73,7 +75,8 @@ export default function App(props) {
           <Route exact path="/favorites">
             <FavoritePage />
           </Route>
-          <Route exact path="/" render={props => <checkList />} />
+          <Route exact path="/progress">
+            </Route> 
          </Switch>
       </BrowserRouter>);
   }
@@ -115,7 +118,7 @@ export function CheckListPage(props) {
   return <div>
     <header><TopHeader /></header>
     <MainNav />
-    <SideNav />
+    <ReturnHome />
     <main>
       <checkBox app={props.app} />
     </main>

@@ -31,9 +31,10 @@ export function TopHeader() {
 
     return  (
         <div className="main-nav" role="navigation">
-          <a onClick={handleClick}>
-            Favorites
-          </a>
+          <Link onClick={handleClick}>
+            Favorites                                 
+          </Link> 
+          <a><Link to="/progress">  Progress CheckList</Link></a>
         </div>
     )
   }
@@ -48,6 +49,13 @@ export function TopHeader() {
       </nav>;
   }
 
+  export function ReturnHome() {
+    return <nav>
+      <div className="sidenav" role="navigation">
+      <Link to="/">Return to Home Page</Link>
+      </div>
+    </nav>
+  }
   // Overview returns a set of text containing the overview information for that major page.
   export function Overview(props) {
     let content;
