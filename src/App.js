@@ -5,15 +5,15 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { MainNav, PurpleBlock, TopHeader, Overview } from "./component/pageElement";
 /*import { MainNav, SideNav, PurpleBlock, TopHeader, Overview } from "./component/pageElement"; */
 import { MajorImages } from "./component/MajorImages";
-import { CardList } from "./component/cards";
+import { CardList, FavoriteList } from "./component/cards";
 import { Footer } from "./component/Footers";
 import { MajorFooter } from "./component/MajorFooter";
-import { Filter } from "./component/filter";
-import { FavoritePage } from "./component/FavoritePage"
 import { ProgressList } from "./component/check.js";
 /* import { ReturnHome } from "./component/pageElement"; */
 import 'firebase/auth';
 import 'firebase/database';
+import favoriteList from "./component/favoriteList";
+
 
 
 
@@ -52,6 +52,20 @@ export default function App(props) {
     }
   }, [])
 
+  console.log("Printing favorite list", favoriteList)
+  const [unfavorite, setUnfavorite] = useState(favoriteList);
+  console.log("Printing unfavorite", unfavorite);
+    const handleUnfavorite = (name) => {
+        let listIndex = 0;
+        for (let i = 0; i < unfavorite.length; i++) {
+          if (unfavorite[i] === name) {
+            listIndex = i;
+          }
+        }
+        unfavorite.splice(listIndex, 1);   
+        setUnfavorite(unfavorite);
+      };
+
   
 
   let content = null;
@@ -77,7 +91,7 @@ export default function App(props) {
              <MajorPage content={props.content}/>
           </Route>
           <Route exact path="/favorites">
-            <FavoritePage />
+            <FavoritePage majors={props.majors} removeCallback={handleUnfavorite}/>
           </Route>
           <Route exact path="/progress">
           <CheckListPage progresses={props.progresses}/>
@@ -128,5 +142,21 @@ export function CheckListPage(props) {
     <ProgressList progresses={props.progresses} />
     <Footer />
   </div>;
+}
+
+export function FavoritePage(props) {
+  
+
+
+
+  return <div>
+    <header><TopHeader /></header>
+    <PurpleBlock name={"Favorite Programs"}/>
+    <MainNav />
+    {/*<ReturnHome />
+    <Filter />*/}
+    <FavoriteList cards={props.majors} removeCallback={props.removeCallback}/>
+    <Footer />
+    </div>;
 }
 
