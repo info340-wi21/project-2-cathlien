@@ -58,6 +58,7 @@ export default function App(props) {
         }
         unfavorite.splice(listIndex, 1);   
         setUnfavorite(unfavorite);
+        console.log("button clicked");
       };
 
   
