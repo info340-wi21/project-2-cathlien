@@ -1,31 +1,30 @@
 import { useState } from "react";
 
 export function Check(props) {
-    const thisCheck = props.progress
+    const thisCheck = props.progress;
     
-    const [taskState, setState] = useState(thisCheck.complete)
+    const [taskState, setState] = useState(thisCheck.complete);
     
     let changeFont = '';
-    if(thisCheck.complete === true) {
+    if(taskState) {
         changeFont = 'bg-success';
     } else {
         changeFont = 'bg-danger';
     }
 
     const handleClick = (event) => {
-        setState(!taskState)
-        console.log("you clicked on", thisCheck.complete)
+        setState(!taskState);
     }
     return (
         <li className={changeFont} onClick={handleClick}>
             {thisCheck.checkText}
         </li>
-    )
+    );
 }
 
 export function ProgressList(props) {
     let checks = props.progresses.map((eachCheck) => {
-        let thisCheck = <Check key={eachCheck.id} progress={eachCheck} />
+        let thisCheck = <Check key={eachCheck.id} progress={eachCheck} />;
         return thisCheck;
     })
     return (

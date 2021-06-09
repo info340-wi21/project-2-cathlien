@@ -122,12 +122,13 @@ export function MajorPage(props) {
 export function CheckListPage(props) {
   return <div>
     <header><TopHeader /></header>
-    <PurpleBlock name="Progress CheckList" />
+    <PurpleBlock name="Check List" />
     <MainNav />
     {/*<ReturnHome />*/}
     <main>
       <ProgressList progresses={props.progresses} />
     </main>
+    <Footer />
   </div>;
 }
 
