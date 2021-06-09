@@ -16,7 +16,6 @@ export function MajorCard(props) {
         if (!favoriteList.includes(majorCard.majorName)) {
           favoriteList.push(majorCard.majorName);
         }
-
     }
 
     let majorCard = props.majorCard;
@@ -69,17 +68,13 @@ export function CardList(props) {
 }
 
 
-
-
 export function FavoriteCard(props) {
-
   const [redirectTo, setRedirectTo] = useState(undefined);
   const handleClick = () => {
     console.log("You clicked on", props.majorCard.majorName);
     setRedirectTo(true);
   }
   
-
   let majorCard = props.majorCard;
   
   // Classes for major card, used for sorting
@@ -99,7 +94,6 @@ export function FavoriteCard(props) {
     return <Redirect push to={link}/>
   }
 
-
   let favoriteCard =  (
     <div className={cardClasses}>
       <img
@@ -116,7 +110,6 @@ export function FavoriteCard(props) {
       </div>
     </div>
   )
-
   
   return(favoriteCard);
 }
