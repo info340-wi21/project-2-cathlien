@@ -14,13 +14,15 @@ const sample_progress = [
   { id: 3, checkText: "Start application", complete:false}
 ];
 const firebaseConfig = {
-    apiKey: "AIzaSyAHKWZKdKFFvC2dEKbgAKffJer_RblZzu8",
-    authDomain: "fitfriend-d7148.firebaseapp.com",
-    projectId: "fitfriend-d7148",
-    storageBucket: "fitfriend-d7148.appspot.com",
-    messagingSenderId: "293567760961",
-    appId: "1:293567760961:web:c43e5c15d44def523e54c0"
-  };
+  apiKey: "AIzaSyDpjYTAcZMzBTIiIMs9JD84-wNSuXNnRAQ",
+  authDomain: "info-340-project-2-c6fec.firebaseapp.com",
+  databaseURL: "https://info-340-project-2-c6fec-default-rtdb.firebaseio.com",
+  projectId: "info-340-project-2-c6fec",
+  storageBucket: "info-340-project-2-c6fec.appspot.com",
+  messagingSenderId: "176068516336",
+  appId: "1:176068516336:web:b8afc1a4a1bb8ff7986535",
+  measurementId: "G-TBDPJSEMZT"
+};
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 

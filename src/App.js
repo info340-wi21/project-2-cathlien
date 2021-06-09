@@ -15,6 +15,8 @@ import { Filter } from "./component/filter";
 import { FavoritePage } from "./component/FavoritePage"
 import { ProgressList } from "./component/check.js";
 import { ReturnHome } from "./component/pageElement";
+import 'firebase/auth';
+import 'firebase/database';
 
 
 // uiConfig used for firebase authentication
@@ -22,14 +24,14 @@ const uiConfig = {
   signInOptions: [
     {
       provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-      requireDisplayName: true,
+      requireDisplayName: true
     },
     firebase.auth.GoogleAuthProvider.PROVIDER_ID
   ],
-  credentialHelper: "none",
-  signInFlow: "popup",
+  credentialHelper: 'none',
+  signInFlow: 'popup',
   callbacks: {
-    signInSuccessWithAuthResult: () => false
+    signInSuccessWithAuthResult: () => false,
   }
 };
 
@@ -51,12 +53,16 @@ export default function App(props) {
     }
   }, [])
 
+  const handleSignOut = () => {
+    firebase.auth().signOut();
+  }
 
   let content = null;
+
   if (!user) {
     content = (
       <div className="container">
-        <h1>sign up</h1>
+        <h1>Sign Up</h1>
         <StyledFirebaseAuth
           uiConfig={uiConfig}
           firebaseAuth={firebase.auth()}
@@ -83,7 +89,7 @@ export default function App(props) {
       </BrowserRouter>);
   }
 
-  return <div>{content}</div>;
+  return (<div>{content}</div>);
 }
 
 
