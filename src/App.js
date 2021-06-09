@@ -86,6 +86,9 @@ export default function App(props) {
           <CheckListPage progresses={props.progresses}/>
             </Route> 
          </Switch>
+         <button className="btn btn-warning" onClick={handleSignOut}>
+            Log Out {user.displayName}
+         </button>
       </BrowserRouter>);
   }
 
@@ -132,5 +135,4 @@ export function CheckListPage(props) {
     </main>
   </div>;
 }
-
 
