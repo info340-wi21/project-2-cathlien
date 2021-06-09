@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from 'react-router-dom';
-import favoriteList from "./favoriteList";
+import favorites from "./favorites";
 
 // MajorCard returns a MajorCard component that is made up of several divs holding an image, a header, and information about the major.
 export function MajorCard(props) {
@@ -13,8 +13,8 @@ export function MajorCard(props) {
     
     const handleFavorite = () => {
       // builds the array of favorites for the favorite page
-        if (!favoriteList.includes(majorCard.majorName)) {
-          favoriteList.push(majorCard.majorName);
+        if (!favorites.includes(majorCard.majorName)) {
+          favorites.push(majorCard.majorName);
         }
     }
 
@@ -117,7 +117,7 @@ export function FavoriteCard(props) {
 export function FavoriteList(props) {
   let cards = props.cards;
   let element = cards.map((card) => {
-    if (favoriteList.includes(card.majorName)) {
+    if (favorites.includes(card.majorName)) {
       return <FavoriteCard key={card.majorName} majorCard={card} removeCallback={props.removeCallback} />;
     }
   })

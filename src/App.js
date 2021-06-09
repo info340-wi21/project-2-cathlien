@@ -3,18 +3,14 @@ import { BrowserRouter, Route, Switch, useParams } from 'react-router-dom';
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { MainNav, PurpleBlock, TopHeader, Overview } from "./component/pageElement";
-/*import { MainNav, SideNav, PurpleBlock, TopHeader, Overview } from "./component/pageElement"; */
 import { MajorImages } from "./component/MajorImages";
 import { CardList, FavoriteList } from "./component/cards";
 import { Footer } from "./component/Footers";
 import { MajorFooter } from "./component/MajorFooter";
 import { ProgressList } from "./component/check.js";
-/* import { ReturnHome } from "./component/pageElement"; */
 import 'firebase/auth';
 import 'firebase/database';
-import favoriteList from "./component/favoriteList";
-
-
+import favorites from "./component/favorites";
 
 
 
@@ -52,9 +48,7 @@ export default function App(props) {
     }
   }, [])
 
-  console.log("Printing favorite list", favoriteList)
-  const [unfavorite, setUnfavorite] = useState(favoriteList);
-  console.log("Printing unfavorite", unfavorite);
+  const [unfavorite, setUnfavorite] = useState(favorites);
     const handleUnfavorite = (name) => {
         let listIndex = 0;
         for (let i = 0; i < unfavorite.length; i++) {
@@ -125,7 +119,6 @@ export function MajorPage(props) {
     <header><TopHeader /></header>
     <PurpleBlock name={majorName}/>
     <MainNav />
-    {/*<SideNav />*/}
     <main>
       <MajorImages name={majorName} content={props.content}/>
       <Overview name={majorName} content={props.content}/>
@@ -138,7 +131,6 @@ export function CheckListPage(props) {
     <header><TopHeader /></header>
     <PurpleBlock name="Check List" />
     <MainNav />
-    {/*<ReturnHome />*/}
     <ProgressList progresses={props.progresses} />
     <Footer />
   </div>;
@@ -146,15 +138,10 @@ export function CheckListPage(props) {
 
 export function FavoritePage(props) {
   
-
-
-
   return <div>
     <header><TopHeader /></header>
     <PurpleBlock name={"Favorite Programs"}/>
     <MainNav />
-    {/*<ReturnHome />
-    <Filter />*/}
     <FavoriteList cards={props.majors} removeCallback={props.removeCallback}/>
     <Footer />
     </div>;
