@@ -11,6 +11,7 @@ export function MajorCard(props) {
       console.log("You clicked on", props.majorCard.majorName);
       setRedirectTo(true);
     }
+    
 
     const [favorite, setFavorite] = useState(undefined)
     const handleFavorite = () => {
@@ -78,7 +79,11 @@ export function MajorCard(props) {
 
     // builds the array of favorites for the favorite page
     if (favorite === true) {
-      favoriteList.push(favoriteCard)
+      if (!favoriteList.names.includes(majorCard.majorName)) {
+        favoriteList.names.push(majorCard.majorName);
+        favoriteList.cards.push(favoriteCard);
+      }
+
       console.log(favoriteList)
     }
 
@@ -102,4 +107,3 @@ export function CardList(props) {
   })
   return <div className="container"><div className="card-columns">{element}</div></div>
 }
-
