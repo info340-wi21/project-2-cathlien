@@ -2,11 +2,8 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch, useParams } from 'react-router-dom';
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import { MainNav } from "./component/pageElement";
-import { SideNav } from "./component/pageElement";
-import { PurpleBlock } from "./component/pageElement";  
-import { TopHeader } from "./component/pageElement";
-import { Overview } from "./component/pageElement";
+import { MainNav, PurpleBlock, TopHeader, Overview } from "./component/pageElement";
+/*import { MainNav, SideNav, PurpleBlock, TopHeader, Overview } from "./component/pageElement"; */
 import { MajorImages } from "./component/MajorImages";
 import { CardList } from "./component/cards";
 import { Footer } from "./component/Footers";
@@ -14,9 +11,11 @@ import { MajorFooter } from "./component/MajorFooter";
 import { Filter } from "./component/filter";
 import { FavoritePage } from "./component/FavoritePage"
 import { ProgressList } from "./component/check.js";
-import { ReturnHome } from "./component/pageElement";
+/* import { ReturnHome } from "./component/pageElement"; */
 import 'firebase/auth';
 import 'firebase/database';
+
+
 
 
 // uiConfig used for firebase authentication
@@ -98,7 +97,7 @@ export function HomePage(props) {
     <header><TopHeader /></header>
     <PurpleBlock name={"Undergraduate Programs"}/>
     <MainNav />
-    <Filter />
+    {/* <Filter /> */}
     <CardList cards={props.majors} />
     <Footer />
     </div>;
@@ -112,7 +111,7 @@ export function MajorPage(props) {
     <header><TopHeader /></header>
     <PurpleBlock name={majorName}/>
     <MainNav />
-    <SideNav />
+    {/*<SideNav />*/}
     <main>
       <MajorImages name={majorName} content={props.content}/>
       <Overview name={majorName} content={props.content}/>
@@ -125,7 +124,7 @@ export function CheckListPage(props) {
     <header><TopHeader /></header>
     <PurpleBlock name="Progress CheckList" />
     <MainNav />
-    <ReturnHome />
+    {/*<ReturnHome />*/}
     <main>
       <ProgressList progresses={props.progresses} />
     </main>

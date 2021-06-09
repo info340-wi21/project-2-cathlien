@@ -1,5 +1,6 @@
 import { Link, Redirect } from 'react-router-dom';
 import React, { useState } from "react";
+import { Home } from '@material-ui/icons';
 
 // TopHeader returns a few elements containing glossary information for the header.
 export function TopHeader() {
@@ -31,6 +32,7 @@ export function TopHeader() {
 
     return  (
         <div className="main-nav" role="navigation">
+          <Link to="/"><Home />Home Page</Link>
           <Link onClick={handleClick}>
             Favorites                                 
           </Link> 
@@ -39,6 +41,7 @@ export function TopHeader() {
     )
   }
 
+  /*
   // SideNav returns a nav column used on the individual major pages.
   export function SideNav() {
     return <nav>
@@ -55,7 +58,7 @@ export function TopHeader() {
       <Link to="/">Return to Home Page</Link>
       </div>
     </nav>
-  }
+  } */
   // Overview returns a set of text containing the overview information for that major page.
   export function Overview(props) {
     let content;
