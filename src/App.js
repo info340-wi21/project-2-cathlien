@@ -53,9 +53,7 @@ export default function App(props) {
     }
   }, [])
 
-  const handleSignOut = () => {
-    firebase.auth().signOut();
-  }
+  
 
   let content = null;
 
@@ -86,9 +84,7 @@ export default function App(props) {
           <CheckListPage progresses={props.progresses}/>
             </Route> 
          </Switch>
-         <button className="btn btn-warning" onClick={handleSignOut}>
-            Log Out {user.displayName}
-         </button>
+         
       </BrowserRouter>);
   }
 

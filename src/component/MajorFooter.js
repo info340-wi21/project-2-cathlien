@@ -1,3 +1,5 @@
+import firebase from "firebase";
+
 // MajorFooter returns a footer element forthe major pages containing author information, citations for information, and citations for images and icons.
 export function MajorFooter(props) {
   let content;
@@ -23,5 +25,12 @@ export function MajorFooter(props) {
           Cover image from <a
           href="https://unsplash.com/s/photos/green-leaf"><cite>Unsplash</cite></a>
   </p>
+  <button className="btn btn-warning" onClick={handleSignOut}>
+            Log Out
+  </button>
 </footer>;
+}
+
+const handleSignOut = () => {
+  firebase.auth().signOut();
 }

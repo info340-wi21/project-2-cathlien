@@ -1,4 +1,6 @@
-// Returns a footer component containing author informartion, and citations for images and icons.
+import firebase from "firebase";
+
+// Returns a footer component containing author information, and citations for images and icons.
 export function Footer() {
   return <footer className="text-center">
   <p>
@@ -10,6 +12,12 @@ export function Footer() {
           <cite>Iconfinder</cite></a>. Cover image from <a
           href="https://unsplash.com/s/photos/green-leaf"><cite>Unsplash</cite></a>
   </p>
+  <button className="btn btn-warning" onClick={handleSignOut}>
+            Log Out
+  </button>
 </footer>;
 }
 
+const handleSignOut = () => {
+  firebase.auth().signOut();
+}

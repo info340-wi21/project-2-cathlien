@@ -34,7 +34,7 @@ export function TopHeader() {
           <Link onClick={handleClick}>
             Favorites                                 
           </Link> 
-          <a><Link to="/progress">  Progress CheckList</Link></a>
+          <Link to="/progress">Check List</Link>
         </div>
     )
   }

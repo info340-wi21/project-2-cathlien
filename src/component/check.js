@@ -6,7 +6,7 @@ export function Check(props) {
     const [taskState, setState] = useState(thisCheck.complete)
     
     let changeFont = '';
-    if(thisCheck.complete == true) {
+    if(thisCheck.complete === true) {
         changeFont = 'bg-success';
     } else {
         changeFont = 'bg-danger';

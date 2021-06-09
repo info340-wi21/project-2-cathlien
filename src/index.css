@@ -169,6 +169,7 @@ select {
   display: inline;
   text-decoration: none;
   font-size: 25px;
+  padding: 20px;
 }
 
 .card {
