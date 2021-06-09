@@ -125,9 +125,7 @@ export function CheckListPage(props) {
     <PurpleBlock name="Check List" />
     <MainNav />
     {/*<ReturnHome />*/}
-    <main>
-      <ProgressList progresses={props.progresses} />
-    </main>
+    <ProgressList progresses={props.progresses} />
     <Footer />
   </div>;
 }

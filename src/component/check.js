@@ -28,8 +28,11 @@ export function ProgressList(props) {
         return thisCheck;
     })
     return (
+        <main>
+        <p>Click to mark each as complete or incomplete:</p>
         <ol>
             {checks}
         </ol>
+        </main>
     );
 }
