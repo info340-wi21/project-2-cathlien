@@ -16,30 +16,13 @@ export function MajorCard(props) {
     const handleFavorite = () => {
       const f = [];
       const userReference = firebase.database().ref('users/' + props.user + '/favorites');
+      console.log(props.user);
       // builds the array of favorites for the favorite page
         if (!favorites.includes(majorCard.majorName)) {
           favorites.push(majorCard.majorName);
-          const newFavObject = {
-            major: majorCard.majorName,
-            degreeType: majorCard.degreeType
-          }
-          f.push(newFavObject);
         }
-        userReference.push(f);
+        userReference.set(favorites);
     };
-    ///const [taskState, setState] = useState(props.cards);
-
-    /*useEffect(() => {
-      const userRef = firebase.database().ref('users/' + props.user + '/favorites');
-      userRef.on('value', (snapshot) => {
-        const theValue = snapshot.val();
-        setState(theValue);
-      })
-    }, [props.user])
-
-    const userReference = firebase.database().ref('users/' + props.user + '/favorites');
-    userReference.set(taskState);*/
-
 
 
     let majorCard = props.majorCard;
@@ -84,7 +67,7 @@ export function MajorCard(props) {
 export function CardList(props) {
   let cards = props.cards;
   let element = cards.map((card) => {
-    return <MajorCard key={card.majorName} majorCard={card} />;
+    return <MajorCard key={card.majorName} user={props.user} majorCard={card} />;
   })
   return <div className="container"><div className="card-columns">{element}</div></div>
 }

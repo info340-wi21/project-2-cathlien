@@ -81,7 +81,7 @@ export default function App(props) {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" >
-           <HomePage majors={props.majors} />
+           <HomePage majors={props.majors} user={user.uid} />
           </Route>
           <Route exact path="/major/:majorName">
              <MajorPage content={props.content}/>
@@ -107,7 +107,7 @@ export function HomePage(props) {
     <header><TopHeader /></header>
     <PurpleBlock name={"Undergraduate Programs"}/>
     <MainNav />
-    <CardList cards={props.majors} />
+    <CardList cards={props.majors} user={props.user}/>
     <Footer />
     </div>;
 }
