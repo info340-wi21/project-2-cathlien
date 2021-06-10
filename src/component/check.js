@@ -34,7 +34,8 @@ export function ProgressList(props) {
 
     return (
         <main>
-        <p>Click to mark each as complete or incomplete:</p>
+        <p>This is a progress check list for your desired major. You can track your progress here!</p>
+        <p>Click to cross off a completed item, click again to mark as imcomplete.</p>
         <ol>
             {checks}
         </ol>
