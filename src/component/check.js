@@ -48,9 +48,9 @@ export function Check(props) {
     
     let changeFont = '';
     if(thisCheck.complete) {
-        changeFont = 'bg-success';
+        changeFont = 'text-decoration-line-through';
     } else {
-        changeFont = 'bg-danger';
+        changeFont = 'text-decoration-none';
     }
 
     return (

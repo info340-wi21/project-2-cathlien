@@ -78,21 +78,14 @@ export function CardList(props) {
 
 // Creates the major cards that the users have favorited 
 export function FavoriteList(props) {
-  /*const [favs, setFavs] = useState([]) //an array
+  const [favs, setFavs] = useState([]) //an array
     useEffect(() => {
-      const favReference = firebase.database().ref('myFavs')
+      const favReference = firebase.database().ref('favorites')
       favReference.on('value', (snapshot) => {
-        const theFavObj = snapshot.val()
-        let ObjKeyArray = Object.keys(theFavObj) //turn into an array
-        let favArray = ObjKeyArray.map((key) => {
-          let singleFavObj = theFavObj[key]
-          singleFavObj.key = key
-          return singleFavObj;
-        }
-        )
-        setFavs(favArray);
+        const theFavObj = snapshot.val();
+        setFavs(theFavObj);
       })
-    },[])*/
+    },[props.user])
 
   // State will be changed when the user has unfavorited a card 
   const [unfavorite, setUnfavorite] = useState(favorites);
