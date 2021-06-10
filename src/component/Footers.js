@@ -1,4 +1,5 @@
 import firebase from "firebase";
+import { Button } from 'reactstrap';
 
 // Returns a footer component containing author information, and citations for images and icons.
 export function Footer() {
@@ -11,9 +12,7 @@ export function Footer() {
           <cite>Iconfinder</cite></a>. Cover image from <a
           href="https://unsplash.com/s/photos/green-leaf"><cite>Unsplash</cite></a>.
   </p>
-  <button className="btn btn-warning" onClick={handleSignOut}>
-            Log Out
-  </button>
+  <Button color="warning" onClick={handleSignOut}>Log Out</Button>
 </footer>;
 }
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from 'react-router-dom';
 import favorites from "./favorites";
-import firebase from "firebase/app";
+import { Button, Card, CardText, CardImg, CardBody, CardTitle, CardFooter } from 'reactstrap';
 
 
 // MajorCard returns a MajorCard component that is made up of several divs holding an image, a header, and information about the major.
@@ -46,20 +46,19 @@ export function MajorCard(props) {
       return <Redirect push to={link}/>
     }
 
-    let homePageCard =  (
+    let homePageCard = (
       <div className={cardClasses}>
-        <img
-         className="card-img-top" src={majorCard.imgURL} alt={majorCard.alt}> 
-        </img>
-        <div className="card-body">
-          <h4 className="card-title text-center">{majorCard.majorName}</h4>
-          <p className="card-text text-center"> {degreeInfo} </p>
-          <div class="btn btn-outline-success" role="button" onClick={handleClick}>Learn more</div>
-          <div class="btn btn-outline-success" role="button" onClick={handleFavorite}>Add to favorites</div>
-        </div>
-        <div className="card-footer text-center text-muted">Image from <a
-              href="https://unsplash.com/photos/TiTblwCHZFY"><cite>Unsplash</cite></a>
-        </div>
+        <Card>
+          <CardImg top width="100%" src={majorCard.imgURL} alt={majorCard.alt}></CardImg>
+          <CardBody>
+            <CardTitle tag="h4" className="text-center">{majorCard.majorName}</CardTitle>
+            <CardText tag="p" className="text-center">{degreeInfo}</CardText>
+            <Button outline color="success" onClick={handleClick}>Learn more</Button>
+            <Button outline color="success" onClick={handleFavorite}>Add to favorites</Button>
+          </CardBody>
+          <CardFooter className="text-center text-muted">Image from <a
+              href="https://unsplash.com/photos/TiTblwCHZFY"><cite>Unsplash</cite></a></CardFooter>
+        </Card>
       </div>
     )
 
@@ -74,52 +73,6 @@ export function CardList(props) {
     return <MajorCard key={card.majorName} majorCard={card} />;
   })
   return <div className="container"><div className="card-columns">{element}</div></div>
-}
-
-
-export function FavoriteCard(props) {
-  const [redirectTo, setRedirectTo] = useState(undefined);
-  const handleClick = () => {
-    setRedirectTo(true);
-  }
-  
-  let majorCard = props.majorCard;
-  
-  // Classes for major card, used for sorting
-  let cardClasses = "card text-center m-4" + majorCard.degreeType + majorCard.majorStatus;
-  if (majorCard.minor === true) {
-    cardClasses = cardClasses + "minor";
-  }
-
-  // Adding formatting for the type of degree it is and if there is a minor
-  let degreeInfo = majorCard.degreeType;
-  if (majorCard.minor === true) {
-    degreeInfo = degreeInfo + ", Minor";
-  }
-
-  if (redirectTo) {
-    let link = "/major/" + props.majorCard.majorName;
-    return <Redirect push to={link}/>
-  }
-
-  let favoriteCard =  (
-    <div className={cardClasses}>
-      <img
-       className="card-img-top" src={majorCard.imgURL} alt={majorCard.alt}> 
-      </img>
-      <div className="card-body">
-        <h4 className="card-title text-center">{majorCard.majorName}</h4>
-        <p className="card-text text-center"> {degreeInfo} </p>
-        <div class="btn btn-outline-success" role="button" onClick={handleClick}>Learn more</div>
-        <div class="btn btn-outline-success" role="button" onClick={() => {props.removeCallback(majorCard.majorName)}}>Remove from favorites</div>
-      </div>
-      <div className="card-footer text-center text-muted">Image from <a
-            href="https://unsplash.com/photos/TiTblwCHZFY"><cite>Unsplash</cite></a>
-      </div>
-    </div>
-  )
-  
-  return(favoriteCard);
 }
 
 
@@ -186,20 +139,21 @@ export function FavoriteList(props) {
       return <Redirect push to={link}/>
     }
 
-    return (<div className={cardClasses}>
-      <img
-       className="card-img-top" src={card.imgURL} alt={card.alt}> 
-      </img>
-      <div className="card-body">
-        <h4 className="card-title text-center">{card.majorName}</h4>
-        <p className="card-text text-center"> {degreeInfo} </p>
-        <div class="btn btn-outline-success" role="button" onClick={handleClick}>Learn more</div>
-        <div class="btn btn-outline-success" role="button" onClick={() => {handleUnfavorite(card.majorName)}}>Remove from favorites</div>
+    return (
+      <div className={cardClasses}>
+        <Card>
+          <CardImg top width="100%" src={card.imgURL} alt={card.alt}></CardImg>
+          <CardBody>
+            <CardTitle tag="h4" className="text-center">{card.majorName}</CardTitle>
+            <CardText tag="p" className="text-center">{degreeInfo}</CardText>
+            <Button outline color="success" onClick={handleClick}>Learn more</Button>
+            <Button outline color="success" onClick={() => {handleUnfavorite(card.majorName)}}>Remove from favorites</Button>
+          </CardBody>
+          <CardFooter className="text-center text-muted">Image from <a
+              href="https://unsplash.com/photos/TiTblwCHZFY"><cite>Unsplash</cite></a></CardFooter>
+        </Card>
       </div>
-      <div className="card-footer text-center text-muted">Image from <a
-            href="https://unsplash.com/photos/TiTblwCHZFY"><cite>Unsplash</cite></a>
-      </div>
-    </div>)
+    )
     }
   }
 
