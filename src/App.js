@@ -55,7 +55,8 @@ export default function App(props) {
         firebase.database().ref('users/' + uid).set({
           username: displayName,
           uid: uid, 
-          checks: props.progresses
+          checks: props.progresses,
+          favorites: props.major
         });
       }
     });
