@@ -87,10 +87,15 @@ export function FavoriteList(props) {
       }
     })
       setUnfavorite(copy);
-      
+      for (let i = 0; i < favorites.length; i++) {
+        if (name === favorites[i]) {
+          favorites.splice(i, 1);
+        }
+      }
+      const userRef = firebase.database().ref('users/' + props.user + '/favorites');
+      userRef.set(copy);
     };
-
-    
+   
 
     
 
