@@ -14,15 +14,17 @@ export function MajorCard(props) {
     }
     
     const handleFavorite = () => {
+      var f =[];
       // builds the array of favorites for the favorite page
         if (!favorites.includes(majorCard.majorName)) {
           favorites.push(majorCard.majorName);
           const newFavObject = {
-            major: majorCard.majorName
+            major: majorCard.majorName,
+            degreeType: majorCard.degreeType
           }
-          const favRef = firebase.database().ref('myFavs')
-          favRef.push(newFavObject)
+          f.push(newFavObject);
         }
+        userRef.child('favorites').set(f);
     }
 
     let majorCard = props.majorCard;
@@ -125,15 +127,20 @@ export function FavoriteCard(props) {
 
 export function FavoriteList(props) {
   const [favs, setFavs] = useState([]) //an array
-
-  useEffect(() => {
-    const favReference = firebase.database().ref('myFavs')
-    favReference.on('value', (snapshot) => {
-      const theFav = snapshot.val()
-      setFavs(theFav);
-    })
-  },[])
-
+    useEffect(() => {
+      const favReference = firebase.database().ref('myFavs')
+      favReference.on('value', (snapshot) => {
+        const theFavObj = snapshot.val()
+        let ObjKeyArray = Object.keys(theFavObj) //turn into an array
+        let favArray = ObjKeyArray.map((key) => {
+          let singleFavObj = theFavObj[key]
+          singleFavObj.key = key
+          return singleFavObj;
+        }
+        )
+        setFavs(favArray);
+      })
+    },[])
 
 
   const [unfavorite, setUnfavorite] = useState(favorites);
