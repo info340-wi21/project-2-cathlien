@@ -20,7 +20,10 @@ export function MajorCard(props) {
       // builds the array of favorites for the favorite page
         if (!favorites.includes(majorCard.majorName)) {
           favorites.push(majorCard.majorName);
-          userReference.set(favorites);
+          if (favorites !== undefined) {
+            userReference.set(favorites);
+          }
+          
         }
         
     };
@@ -93,7 +96,11 @@ export function FavoriteList(props) {
         }
       }
       const userRef = firebase.database().ref('users/' + props.user + '/favorites');
-      userRef.set(copy);
+      console.log(userRef);
+      if (copy !== undefined) {
+        userRef.set(copy);
+      }
+      
     };
    
 
@@ -151,6 +158,11 @@ export function FavoriteList(props) {
   }
 
   let cards = props.cards;
+
+  const userReference = firebase.database().ref('users/' + props.user + '/favorites');
+  if (favorites !== undefined) {
+    userReference.set(favorites);
+  }
 
   /*
   useEffect(() => {

@@ -56,7 +56,7 @@ export default function App(props) {
           username: displayName,
           uid: uid, 
           checks: props.progresses,
-          favorites: props.major
+          favorites: []
         });
       }
     });
