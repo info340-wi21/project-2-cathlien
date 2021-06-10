@@ -15,6 +15,7 @@ export function MajorCard(props) {
     
     const handleFavorite = () => {
       var f =[];
+      const userRef = firebase.database().ref(props.user.uid);
       // builds the array of favorites for the favorite page
         if (!favorites.includes(majorCard.majorName)) {
           favorites.push(majorCard.majorName);
@@ -24,7 +25,7 @@ export function MajorCard(props) {
           }
           f.push(newFavObject);
         }
-        //userRef.child('favorites').set(f);
+        userRef.child('favorites').set(f);
     }
 
     let majorCard = props.majorCard;

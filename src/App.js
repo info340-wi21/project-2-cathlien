@@ -50,6 +50,17 @@ export default function App(props) {
     }
   }, [])
 
+  const dbRef = firebase.database().ref();
+  function writeUserData(uid, displayName) {
+    dbRef.child("users").child(userId).get().then((snapshot) => {
+      if (!snapshot.exists()) {
+        firebase.database().ref('users/' + uid).set({
+          username: displayName
+        });
+      }
+    });
+  }
+
   const [unfavorite, setUnfavorite] = useState(favorites);
     const handleUnfavorite = (name) => {
         let listIndex = 0;
