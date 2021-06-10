@@ -32,7 +32,6 @@ const uiConfig = {
 };
 
 
-
 // Returns the single page app representing the UW College of Environment information.
 export default function App(props) {
   console.log("app", props);
@@ -66,6 +65,9 @@ export default function App(props) {
       }
     });
   }
+
+
+
 
 
   let content = null;

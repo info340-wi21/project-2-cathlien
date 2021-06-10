@@ -4,8 +4,44 @@ import 'firebase/auth';
 import 'firebase/database';
 
 export function ProgressList(props) {
+  const [taskState, setState] = useState(props.progresses);
+  /*
+  const [taskState, setState] = useState(props.progresses);
+
+    const dbRef = firebase.database().ref();
+    dbRef.child("users").child(props.user).child("checks").get().then((snapshot) => {
+    if (snapshot.exists()) {
+      console.log(snapshot.val());
+      setState(snapshot.val);
+    } else {
+      console.log("No data available");
+    }
+    }).catch((error) => {
+    console.error(error);
+  });*/
+
+
+
+
+  useEffect(() => {
+    //const userRef = firebase.database().ref('users/' + 'mWPXl4YSzKgWXaei023UfiDmBxq1' + '/checks');
+    console.log("user", props.user);
+    const userRef = firebase.database().ref('users/' + props.user + '/checks');
+    userRef.on('value', (snapshot) => {
+      const theValue = snapshot.val();
+      let objectKeyArray = Object.keys(theValue);
+      let checkArray = objectKeyArray.map((key) => {
+        let singleObj = theValue[key];
+        return singleObj;
+      })
+      console.log(objectKeyArray);
+      console.log(checkArray);
+      setState(theValue);
+    })
+
+  }, [props.user])
   
-    const [taskState, setState] = useState(props.progresses);
+    
     let handleClick = (text) => {
         let copy = taskState.map((task) => {
           if (task.checkText === text) {
@@ -23,20 +59,6 @@ export function ProgressList(props) {
     })
 
 
-    
-    useEffect(() => {
-      //const userRef = firebase.database().ref('users/' + 'mWPXl4YSzKgWXaei023UfiDmBxq1' + '/checks');
-      console.log("user", props.user);
-      const userRef = firebase.database().ref('users/' + props.user + '/checks');
-      userRef.on('value', (snapshot) => {
-        const theValue = snapshot.val();
-        setState(theValue);
-      })
-
-    }, [])
-
-
-    //const userRef = firebase.database().ref('users/' + 'mWPXl4YSzKgWXaei023UfiDmBxq1' + '/checks');
     const userRef = firebase.database().ref('users/' + props.user + '/checks');
     userRef.set(taskState);
 
