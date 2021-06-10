@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { Redirect } from 'react-router-dom';
 import favorites from "./favorites";
 import firebase from 'firebase/app';
@@ -14,16 +14,12 @@ export function MajorCard(props) {
     }
     
     const handleFavorite = () => {
-      const f = [];
       const userReference = firebase.database().ref('users/' + props.user + '/favorites');
       console.log(props.user);
       // builds the array of favorites for the favorite page
         if (!favorites.includes(majorCard.majorName)) {
           favorites.push(majorCard.majorName);
-          if (favorites !== undefined) {
-            userReference.set(favorites);
-          }
-          
+          userReference.set(favorites);
         }
         
     };
@@ -96,11 +92,7 @@ export function FavoriteList(props) {
         }
       }
       const userRef = firebase.database().ref('users/' + props.user + '/favorites');
-      console.log(userRef);
-      if (copy !== undefined) {
-        userRef.set(copy);
-      }
-      
+      userRef.set(copy);
     };
    
 
@@ -158,20 +150,6 @@ export function FavoriteList(props) {
   }
 
   let cards = props.cards;
-
-  const userReference = firebase.database().ref('users/' + props.user + '/favorites');
-  if (favorites !== undefined) {
-    userReference.set(favorites);
-  }
-
-  /*
-  useEffect(() => {
-    const userRef = firebase.database().ref('users/' + props.user + '/favorites');
-    userRef.on('value', (snapshot) => {
-      const theValue = snapshot.val();
-      userRef.set(theValue);
-    })
-  }, [props.user])*/
  
   return (
     <div className="container">
