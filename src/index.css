@@ -92,6 +92,10 @@ select {
   display: none;
 }
 
+.strike {
+  text-decoration: line-through;
+}
+
 .resources {
   margin-top: 10px;
 }

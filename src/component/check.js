@@ -48,9 +48,9 @@ export function Check(props) {
     
     let changeFont = '';
     if(thisCheck.complete) {
-        changeFont = 'text-decoration-line-through';
+        changeFont = 'strike';
     } else {
-        changeFont = 'text-decoration-none';
+        changeFont = '';
     }
 
     return (
