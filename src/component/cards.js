@@ -25,7 +25,7 @@ export function MajorCard(props) {
           }
           f.push(newFavObject);
         }
-        userRef.child('favorites').set(f);
+        userRef.push(f);
     }
 
     let majorCard = props.majorCard;
