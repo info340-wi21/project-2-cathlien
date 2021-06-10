@@ -20,8 +20,9 @@ export function MajorCard(props) {
       // builds the array of favorites for the favorite page
         if (!favorites.includes(majorCard.majorName)) {
           favorites.push(majorCard.majorName);
+          userReference.set(favorites);
         }
-        userReference.set(favorites);
+        
     };
 
 
@@ -75,14 +76,7 @@ export function CardList(props) {
 
 // Creates the major cards that the users have favorited 
 export function FavoriteList(props) {
-  const [favs, setFavs] = useState([]) //an array
-    useEffect(() => {
-      const favReference = firebase.database().ref('favorites')
-      favReference.on('value', (snapshot) => {
-        const theFavObj = snapshot.val();
-        setFavs(theFavObj);
-      })
-    },[props.user])
+  
 
   // State will be changed when the user has unfavorited a card 
   const [unfavorite, setUnfavorite] = useState(favorites);
@@ -95,6 +89,10 @@ export function FavoriteList(props) {
       setUnfavorite(copy);
       
     };
+
+    
+
+    
 
   const [redirectTo, setRedirectTo] = useState(undefined);
   const handleClick = () => {
@@ -148,6 +146,15 @@ export function FavoriteList(props) {
   }
 
   let cards = props.cards;
+
+  /*
+  useEffect(() => {
+    const userRef = firebase.database().ref('users/' + props.user + '/favorites');
+    userRef.on('value', (snapshot) => {
+      const theValue = snapshot.val();
+      userRef.set(theValue);
+    })
+  }, [props.user])*/
  
   return (
     <div className="container">

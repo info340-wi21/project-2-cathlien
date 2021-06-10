@@ -87,7 +87,7 @@ export default function App(props) {
              <MajorPage content={props.content}/>
           </Route>
           <Route exact path="/favorites">
-            <FavoritePage majors={props.majors}/>
+            <FavoritePage user={user.uid} majors={props.majors}/>
           </Route>
           <Route exact path="/progress">
           <CheckListPage user={user.uid} progresses={props.progresses}/>
