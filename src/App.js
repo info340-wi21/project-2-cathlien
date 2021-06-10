@@ -52,7 +52,7 @@ export default function App(props) {
 
   const dbRef = firebase.database().ref();
   function writeUserData(uid, displayName) {
-    dbRef.child("users").child(userId).get().then((snapshot) => {
+    dbRef.child("users").child(uid).get().then((snapshot) => {
       if (!snapshot.exists()) {
         firebase.database().ref('users/' + uid).set({
           username: displayName
@@ -61,20 +61,6 @@ export default function App(props) {
     });
   }
 
-  const [unfavorite, setUnfavorite] = useState(favorites);
-    const handleUnfavorite = (name) => {
-        let listIndex = 0;
-        for (let i = 0; i < unfavorite.length; i++) {
-          if (unfavorite[i] === name) {
-            listIndex = i;
-          }
-        }
-        unfavorite.splice(listIndex, 1);   
-        setUnfavorite(unfavorite);
-        console.log("button clicked");
-      };
-
-  
 
   let content = null;
 
@@ -99,7 +85,7 @@ export default function App(props) {
              <MajorPage content={props.content}/>
           </Route>
           <Route exact path="/favorites">
-            <FavoritePage majors={props.majors} removeCallback={handleUnfavorite}/>
+            <FavoritePage majors={props.majors}/>
           </Route>
           <Route exact path="/progress">
           <CheckListPage progresses={props.progresses}/>
@@ -119,7 +105,6 @@ export function HomePage(props) {
     <header><TopHeader /></header>
     <PurpleBlock name={"Undergraduate Programs"}/>
     <MainNav />
-    {/* <Filter /> */}
     <CardList cards={props.majors} />
     <Footer />
     </div>;
@@ -156,7 +141,7 @@ export function FavoritePage(props) {
     <header><TopHeader /></header>
     <PurpleBlock name={"Favorite Programs"}/>
     <MainNav />
-    <FavoriteList cards={props.majors} removeCallback={props.removeCallback}/>
+    <FavoriteList cards={props.majors}/>
     <Footer />
     </div>;
 }
