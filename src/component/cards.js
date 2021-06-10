@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect } from 'react-router-dom';
 import favorites from "./favorites";
-import firebase from "../../node_modules/firebase/app";
+import firebase from "firebase/app";
+
 
 // MajorCard returns a MajorCard component that is made up of several divs holding an image, a header, and information about the major.
 export function MajorCard(props) {
@@ -21,8 +22,6 @@ export function MajorCard(props) {
           }
           const favRef = firebase.database().ref('myFavs')
           favRef.push(newFavObject)
-
-
         }
     }
 
@@ -122,8 +121,9 @@ export function FavoriteCard(props) {
   return(favoriteCard);
 }
 
-export function FavoriteList(props) {
 
+
+export function FavoriteList(props) {
   const [favs, setFavs] = useState([]) //an array
 
   useEffect(() => {
@@ -133,15 +133,88 @@ export function FavoriteList(props) {
       setFavs(theFav);
     })
   },[])
+
+
+
+  const [unfavorite, setUnfavorite] = useState(favorites);
+  const handleUnfavorite = (name) => {
+    let copy = unfavorite.map((item) => {
+      if (item !== name) {
+        return item;
+      }
+    })
+      setUnfavorite(copy);
+
+    };
+
+    console.log("favorite list running again");
+
+  const [redirectTo, setRedirectTo] = useState(undefined);
+  const handleClick = () => {
+    console.log("You clicked on", props.majorCard.majorName);
+    setRedirectTo(true);
+  }
   
+  let favoriteCard = (card, cards) => {
+    if (card !== undefined) {
+
+    console.log("this is card", card);
+    let major = cards.filter((object) => {
+      if (object.majorName === card) {
+        return object;
+      }
+    });
+    card = major[0];
+    console.log(card, "card");
+
+  
+    // Classes for major card, used for sorting
+    let cardClasses = "card text-center m-4" + card.degreeType + card.majorStatus;
+    if (card.minor === true) {
+      cardClasses = cardClasses + "minor";
+    }
+
+    // Adding formatting for the type of degree it is and if there is a minor
+    let degreeInfo = card.degreeType;
+    if (card.minor === true) {
+      degreeInfo = degreeInfo + ", Minor";
+    }
+
+    if (redirectTo) {
+      let link = "/major/" + card.majorName;
+      return <Redirect push to={link}/>
+    }
+
+    return (<div className={cardClasses}>
+      <img
+       className="card-img-top" src={card.imgURL} alt={card.alt}> 
+      </img>
+      <div className="card-body">
+        <h4 className="card-title text-center">{card.majorName}</h4>
+        <p className="card-text text-center"> {degreeInfo} </p>
+        <div class="btn btn-outline-success" role="button" onClick={handleClick}>Learn more</div>
+        <div class="btn btn-outline-success" role="button" onClick={() => {handleUnfavorite(card.majorName)}}>Remove from favorites</div>
+      </div>
+      <div className="card-footer text-center text-muted">Image from <a
+            href="https://unsplash.com/photos/TiTblwCHZFY"><cite>Unsplash</cite></a>
+      </div>
+    </div>)
+    }
+  }
+
 
   let cards = props.cards;
-  let element = cards.map((card) => {
-    if (favorites.includes(card.majorName)) {
-    //if(favs.length == 0) {return null;}
-    //else {
-    return <FavoriteCard key={card.majorName} majorCard={card} removeCallback={props.removeCallback} />;
-    }
-  })
-  return <div className="container"><div className="card-columns">{element}</div></div>
+ 
+  return (
+    <div className="container">
+      <div className="card-columns">
+      {
+        unfavorite.map((card) => {
+          return (favoriteCard(card, cards))
+       })
+       
+      } 
+      </div>
+    </div>
+  )
 }
