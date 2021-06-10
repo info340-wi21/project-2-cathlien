@@ -1,24 +1,10 @@
 import { useState, useEffect } from "react";
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 
 export function ProgressList(props) {
-    //const [check, setCheck] = useState([]) //an array
-
-    /*
-    useEffect(() => {
-        const checkReference = firebase.database().ref('users/reQnafcyrPSLFF7ewL452GcUgMs2/checks')
-        checkReference.on('value', (snapshot) => {
-          const theCheck = snapshot.val()
-          console.log(theCheck);
-          setCheck(theCheck);
-        })
-      },[])*/
-
-    // reference to the database
-    
-
+  
     const [taskState, setState] = useState(props.progresses);
     let handleClick = (text) => {
         let copy = taskState.map((task) => {
@@ -32,26 +18,27 @@ export function ProgressList(props) {
     
 
     let checks = taskState.map((eachCheck) => {
-        //console.log(eachCheck.id);
-        //console.log(check["check" + eachCheck.id]); 
         let thisCheck = <Check key={eachCheck.id} progress={eachCheck} clickCallback={handleClick}/>;
         return thisCheck;
     })
 
+
+    
     useEffect(() => {
-      const checkRef = firebase.database().ref('checks');
-      checkRef.on('value', (snapshot) => {
+      //const userRef = firebase.database().ref('users/' + 'mWPXl4YSzKgWXaei023UfiDmBxq1' + '/checks');
+      console.log("user", props.user);
+      const userRef = firebase.database().ref('users/' + props.user + '/checks');
+      userRef.on('value', (snapshot) => {
         const theValue = snapshot.val();
-        console.log("value of message: " + theValue);
         setState(theValue);
       })
 
     }, [])
 
-    const checkRef = firebase.database().ref('checks');
-    checkRef.set(taskState);
 
-
+    //const userRef = firebase.database().ref('users/' + 'mWPXl4YSzKgWXaei023UfiDmBxq1' + '/checks');
+    const userRef = firebase.database().ref('users/' + props.user + '/checks');
+    userRef.set(taskState);
 
     return (
         <main>

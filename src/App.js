@@ -32,6 +32,7 @@ const uiConfig = {
 };
 
 
+
 // Returns the single page app representing the UW College of Environment information.
 export default function App(props) {
   console.log("app", props);
@@ -40,6 +41,9 @@ export default function App(props) {
     const authUnregisterFunction = firebase.auth().onAuthStateChanged((firebaseUser) => {
       if (firebaseUser) {
         setUser(firebaseUser);
+        console.log(firebaseUser.uid);
+        writeUserData(firebaseUser.uid, firebaseUser.displayName);
+
       } else { 
         setUser(null)
       }
@@ -49,12 +53,15 @@ export default function App(props) {
     }
   }, [])
 
+
   const dbRef = firebase.database().ref();
   function writeUserData(uid, displayName) {
     dbRef.child("users").child(uid).get().then((snapshot) => {
       if (!snapshot.exists()) {
         firebase.database().ref('users/' + uid).set({
-          username: displayName
+          username: displayName,
+          uid: uid, 
+          checks: props.progresses
         });
       }
     });
@@ -62,6 +69,7 @@ export default function App(props) {
 
 
   let content = null;
+
 
   if (!user) {
     content = (
@@ -87,11 +95,12 @@ export default function App(props) {
             <FavoritePage majors={props.majors}/>
           </Route>
           <Route exact path="/progress">
-          <CheckListPage progresses={props.progresses}/>
+          <CheckListPage user={user.uid} progresses={props.progresses}/>
             </Route> 
          </Switch>
          
       </BrowserRouter>);
+        console.log(user.uid);
   }
 
   return (<div>{content}</div>);
@@ -129,7 +138,7 @@ export function CheckListPage(props) {
     <header><TopHeader /></header>
     <PurpleBlock name="Check List" />
     <MainNav />
-    <ProgressList progresses={props.progresses} />
+    <ProgressList user={props.user} progresses={props.progresses} />
     <Footer />
   </div>;
 }
