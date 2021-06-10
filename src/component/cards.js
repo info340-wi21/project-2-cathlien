@@ -14,7 +14,7 @@ export function MajorCard(props) {
     
     const handleFavorite = () => {
       let f =[];
-      const userRef = firebase.database().ref(props.user.uid);
+      //const userRef = firebase.database().ref(props.user.uid);
       // builds the array of favorites for the favorite page
         if (!favorites.includes(majorCard.majorName)) {
           favorites.push(majorCard.majorName);
@@ -24,7 +24,7 @@ export function MajorCard(props) {
           }
           f.push(newFavObject);
         }
-        userRef.child('favorites').set(f);
+        //userRef.child('favorites').set(f);
     }
 
     let majorCard = props.majorCard;
@@ -125,7 +125,7 @@ export function FavoriteCard(props) {
 
 
 export function FavoriteList(props) {
-  const [favs, setFavs] = useState([]) //an array
+  /*const [favs, setFavs] = useState([]) //an array
     useEffect(() => {
       const favReference = firebase.database().ref('myFavs')
       favReference.on('value', (snapshot) => {
@@ -139,7 +139,7 @@ export function FavoriteList(props) {
         )
         setFavs(favArray);
       })
-    },[])
+    },[])*/
 
 
   const [unfavorite, setUnfavorite] = useState(favorites);

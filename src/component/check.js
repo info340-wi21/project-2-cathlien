@@ -4,8 +4,9 @@ import 'firebase/auth';
 import 'firebase/database';
 
 export function ProgressList(props) {
-    const [check, setCheck] = useState([]) //an array
+    //const [check, setCheck] = useState([]) //an array
 
+    /*
     useEffect(() => {
         const checkReference = firebase.database().ref('users/reQnafcyrPSLFF7ewL452GcUgMs2/checks')
         checkReference.on('value', (snapshot) => {
@@ -13,7 +14,10 @@ export function ProgressList(props) {
           console.log(theCheck);
           setCheck(theCheck);
         })
-      },[])
+      },[])*/
+
+    // reference to the database
+    
 
     const [taskState, setState] = useState(props.progresses);
     let handleClick = (text) => {
@@ -23,16 +27,32 @@ export function ProgressList(props) {
           }  return task;
         });
         setState(copy);
-      };
+    };
 
+    
 
-
-    let checks = props.progresses.map((eachCheck) => {
-        console.log(eachCheck.id);
-        console.log(check["check" + eachCheck.id]); 
+    let checks = taskState.map((eachCheck) => {
+        //console.log(eachCheck.id);
+        //console.log(check["check" + eachCheck.id]); 
         let thisCheck = <Check key={eachCheck.id} progress={eachCheck} clickCallback={handleClick}/>;
         return thisCheck;
     })
+
+    useEffect(() => {
+      const checkRef = firebase.database().ref('checks');
+      checkRef.on('value', (snapshot) => {
+        const theValue = snapshot.val();
+        console.log("value of message: " + theValue);
+        setState(theValue);
+      })
+
+    }, [])
+
+    const checkRef = firebase.database().ref('checks');
+    checkRef.set(taskState);
+
+
+
     return (
         <main>
         <p>Click to mark each as complete or incomplete:</p>
