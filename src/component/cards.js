@@ -6,7 +6,6 @@ import { Button, Card, CardText, CardImg, CardBody, CardTitle, CardFooter } from
 
 // MajorCard returns a MajorCard component that is made up of several divs holding an image, a header, and information about the major.
 export function MajorCard(props) {
-
     const [redirectTo, setRedirectTo] = useState(undefined);
     const handleClick = () => {
       setRedirectTo(true);
@@ -62,7 +61,6 @@ export function MajorCard(props) {
       </div>
     )
 
-    
     return(homePageCard);
 }
 
@@ -76,7 +74,7 @@ export function CardList(props) {
 }
 
 
-
+// Creates the major cards that the users have favorited 
 export function FavoriteList(props) {
   /*const [favs, setFavs] = useState([]) //an array
     useEffect(() => {
@@ -94,7 +92,7 @@ export function FavoriteList(props) {
       })
     },[])*/
 
-
+  // State will be changed when the user has unfavorited a card 
   const [unfavorite, setUnfavorite] = useState(favorites);
   const handleUnfavorite = (name) => {
     let copy = unfavorite.map((item) => {
@@ -103,7 +101,7 @@ export function FavoriteList(props) {
       }
     })
       setUnfavorite(copy);
-
+      
     };
 
   const [redirectTo, setRedirectTo] = useState(undefined);
@@ -156,7 +154,6 @@ export function FavoriteList(props) {
     )
     }
   }
-
 
   let cards = props.cards;
  

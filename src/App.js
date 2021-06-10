@@ -13,8 +13,6 @@ import { ProgressList } from "./component/check.js";
 import 'firebase/auth';
 import 'firebase/database';
 
-
-
 // uiConfig used for firebase authentication
 const uiConfig = {
   signInOptions: [
@@ -34,15 +32,12 @@ const uiConfig = {
 
 // Returns the single page app representing the UW College of Environment information.
 export default function App(props) {
-  console.log("app", props);
   const [user, setUser] = useState(undefined);
   useEffect(() => {
     const authUnregisterFunction = firebase.auth().onAuthStateChanged((firebaseUser) => {
       if (firebaseUser) {
         setUser(firebaseUser);
-        console.log(firebaseUser.uid);
         writeUserData(firebaseUser.uid, firebaseUser.displayName);
-
       } else { 
         setUser(null)
       }
@@ -52,7 +47,7 @@ export default function App(props) {
     }
   }, [])
 
-
+  // User database is created on the Firebase Realtime Database
   const dbRef = firebase.database().ref();
   function writeUserData(uid, displayName) {
     dbRef.child("users").child(uid).get().then((snapshot) => {
@@ -65,9 +60,6 @@ export default function App(props) {
       }
     });
   }
-
-
-
 
 
   let content = null;
@@ -102,7 +94,6 @@ export default function App(props) {
          </Switch>
          
       </BrowserRouter>);
-        console.log(user.uid);
   }
 
   return (<div>{content}</div>);
@@ -135,6 +126,8 @@ export function MajorPage(props) {
     <MajorFooter name={majorName} content={props.content}/>
   </div>;
 }
+
+// The Template for the Check List page 
 export function CheckListPage(props) {
   return <div>
     <header><TopHeader /></header>
@@ -145,6 +138,7 @@ export function CheckListPage(props) {
   </div>;
 }
 
+// The template for the Favorite Page
 export function FavoritePage(props) {
   
   return <div>
