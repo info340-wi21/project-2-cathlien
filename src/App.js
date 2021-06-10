@@ -145,7 +145,7 @@ export function FavoritePage(props) {
     <header><TopHeader /></header>
     <PurpleBlock name={"Favorite Programs"}/>
     <MainNav />
-    <FavoriteList cards={props.majors}/>
+    <FavoriteList user={props.user} cards={props.majors}/>
     <Footer />
     </div>;
 }

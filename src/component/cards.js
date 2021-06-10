@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from 'react-router-dom';
 import favorites from "./favorites";
+import firebase from 'firebase/app';
+
 import { Button, Card, CardText, CardImg, CardBody, CardTitle, CardFooter } from 'reactstrap';
 
 
@@ -12,8 +14,8 @@ export function MajorCard(props) {
     }
     
     const handleFavorite = () => {
-      let f =[];
-      //const userRef = firebase.database().ref(props.user.uid);
+      const f = [];
+      const userRef = firebase.database().ref('users/' + props.user + '/favorites');
       // builds the array of favorites for the favorite page
         if (!favorites.includes(majorCard.majorName)) {
           favorites.push(majorCard.majorName);
@@ -23,7 +25,7 @@ export function MajorCard(props) {
           }
           f.push(newFavObject);
         }
-        //userRef.child('favorites').set(f);
+        userRef.child('favorites').set(f);
     }
 
     let majorCard = props.majorCard;
