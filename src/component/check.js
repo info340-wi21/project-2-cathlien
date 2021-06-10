@@ -1,6 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import firebase from 'firebase';
+import 'firebase/auth';
+import 'firebase/database';
 
 export function ProgressList(props) {
+    const [check, setCheck] = useState([]) //an array
+
+    useEffect(() => {
+        const checkReference = firebase.database().ref('users/reQnafcyrPSLFF7ewL452GcUgMs2/checks')
+        checkReference.on('value', (snapshot) => {
+          const theCheck = snapshot.val()
+          console.log(theCheck);
+          setCheck(theCheck);
+        })
+      },[])
+
     const [taskState, setState] = useState(props.progresses);
     let handleClick = (text) => {
         let copy = taskState.map((task) => {
@@ -14,6 +28,8 @@ export function ProgressList(props) {
 
 
     let checks = props.progresses.map((eachCheck) => {
+        console.log(eachCheck.id);
+        console.log(check["check" + eachCheck.id]); 
         let thisCheck = <Check key={eachCheck.id} progress={eachCheck} clickCallback={handleClick}/>;
         return thisCheck;
     })
@@ -31,7 +47,6 @@ export function ProgressList(props) {
 
 export function Check(props) {
     const thisCheck = props.progress;
-    
     
     let changeFont = '';
     if(thisCheck.complete) {
