@@ -9,12 +9,11 @@ export function MajorCard(props) {
 
     const [redirectTo, setRedirectTo] = useState(undefined);
     const handleClick = () => {
-      console.log("You clicked on", props.majorCard.majorName);
       setRedirectTo(true);
     }
     
     const handleFavorite = () => {
-      var f =[];
+      let f =[];
       const userRef = firebase.database().ref(props.user.uid);
       // builds the array of favorites for the favorite page
         if (!favorites.includes(majorCard.majorName)) {
@@ -81,7 +80,6 @@ export function CardList(props) {
 export function FavoriteCard(props) {
   const [redirectTo, setRedirectTo] = useState(undefined);
   const handleClick = () => {
-    console.log("You clicked on", props.majorCard.majorName);
     setRedirectTo(true);
   }
   
@@ -155,25 +153,20 @@ export function FavoriteList(props) {
 
     };
 
-    console.log("favorite list running again");
-
   const [redirectTo, setRedirectTo] = useState(undefined);
   const handleClick = () => {
-    console.log("You clicked on", props.majorCard.majorName);
     setRedirectTo(true);
   }
   
   let favoriteCard = (card, cards) => {
     if (card !== undefined) {
 
-    console.log("this is card", card);
     let major = cards.filter((object) => {
       if (object.majorName === card) {
         return object;
       }
     });
     card = major[0];
-    console.log(card, "card");
 
   
     // Classes for major card, used for sorting

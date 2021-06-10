@@ -12,7 +12,6 @@ import { MajorFooter } from "./component/MajorFooter";
 import { ProgressList } from "./component/check.js";
 import 'firebase/auth';
 import 'firebase/database';
-import favorites from "./component/favorites";
 
 
 
